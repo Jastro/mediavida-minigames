@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2dpx57vnmay0"]
+
+[ext_resource type="Script" uid="uid://b4klpxriee755" path="res://scenes/MainMenu.gd" id="1_0xc4k"]
+[ext_resource type="Texture2D" uid="uid://5hwkxpg17d3l" path="res://assets/logomv.png" id="2_0ykhv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.988235, 0.560784, 0.133333, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xc4k")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10980392, 0.12156863, 0.13333334, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_0ykhv")
+expand_mode = 3
+
+[node name="Title" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "MEDIAVIDA MINIGAMES"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MinigamesButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Minijuegos"
+
+[node name="ResetButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reset"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Salir"
+
+[node name="StatsContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="HighScoreLabel" type="Label" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+text = "Record: 0"
+horizontal_alignment = 1
+
+[node name="WinRateLabel" type="Label" parent="VBoxContainer/StatsContainer"]
+layout_mode = 2
+text = "Tasa de victoria: 0%"
+horizontal_alignment = 1
+
+[node name="DifficultyContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DifficultyLabel" type="Label" parent="VBoxContainer/DifficultyContainer"]
+layout_mode = 2
+text = "Dificultad:"
+
+[node name="DifficultyOption" type="OptionButton" parent="VBoxContainer/DifficultyContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1")
+text = "JUGAR"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/MinigamesButton" to="." method="_on_minigames_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="item_selected" from="VBoxContainer/DifficultyContainer/DifficultyOption" to="." method="_on_difficulty_changed"]
