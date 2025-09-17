@@ -15,17 +15,20 @@ Colección de minijuegos en Godot 4.5 - Open Source y extensible por la comunida
 
 ```
 mediavida-minigames/
-├── GameManager.gd              # Sistema principal (Singleton)
-├── minigames/                  # Carpeta de minijuegos
-│   ├── ClickTheTarget.tscn     # Minijuego de ejemplo
-│   └── MinigameTemplate.gd     # Plantilla base para desarrolladores
-├── scenes/                     # Escenas principales
-│   ├── MainMenu.tscn           # Menú principal
-│   ├── MinigamesList.tscn      # Lista de minijuegos disponibles
-│   └── GameComplete.tscn       # Pantalla de completado
-├── scenes/ui/                  # Componentes de interfaz
-│   └── ScorePopup.tscn         # Popup animado de puntuación
-└── audio/sfx/                  # Efectos de sonido
+├── GameManager.gd                 # Sistema principal (Singleton)
+├── minigames/                     # Carpeta de minijuegos
+│   ├── NombreDeTuJuego            # Carpeta de minijuego especifico
+│   │   └── NombreDeTuJuego.tscn   # Escena principal de minijuego especifico (mismo nombre que la carpeta que lo contiene)
+│   ├── ClickTheTarget             # Carpeta de minijuego de ejemplo
+│   │   └── ClickTheTarget.tscn    # Minijuego de ejemplo
+│   └── MinigameTemplate.gd        # Plantilla base para desarrolladores
+├── scenes/                        # Escenas principales
+│   ├── MainMenu.tscn              # Menú principal
+│   ├── MinigamesList.tscn         # Lista de minijuegos disponibles
+│   └── GameComplete.tscn          # Pantalla de completado
+├── scenes/ui/                     # Componentes de interfaz
+│   └── ScorePopup.tscn            # Popup animado de puntuación
+└── audio/sfx/                     # Efectos de sonido
 ```
 
 ## Minijuego Incluido: "Click the Target"
@@ -57,30 +60,30 @@ var is_game_active: bool = false
 var time_left: float = 10.0  # Duración estándar
 
 func _ready():
-    # Instrucciones iniciales (2 segundos)
-    show_instructions()
-    await get_tree().create_timer(2.0).timeout
-    start_minigame()
+	# Instrucciones iniciales (2 segundos)
+	show_instructions()
+	await get_tree().create_timer(2.0).timeout
+	start_minigame()
 
 func start_minigame():
-    is_game_active = true
-    hide_instructions()
+	is_game_active = true
+	hide_instructions()
 
-    # Timer principal del juego
-    var timer = GameManager.start_countdown_timer(10.0, end_minigame)
+	# Timer principal del juego
+	var timer = GameManager.start_countdown_timer(10.0, end_minigame)
 
 func end_minigame():
-    is_game_active = false
+	is_game_active = false
 
-    # Definir condición de victoria (ej: score >= 100)
-    var won = score >= 100
+	# Definir condición de victoria (ej: score >= 100)
+	var won = score >= 100
 
-    # Mostrar resultado por 2-3 segundos
-    show_result(won)
-    await get_tree().create_timer(2.0).timeout
+	# Mostrar resultado por 2-3 segundos
+	show_result(won)
+	await get_tree().create_timer(2.0).timeout
 
-    # IMPORTANTE: Llamar al GameManager para finalizar
-    GameManager.complete_minigame(won, score)
+	# IMPORTANTE: Llamar al GameManager para finalizar
+	GameManager.complete_minigame(won, score)
 ```
 
 ### 2. Funciones Esenciales del GameManager
@@ -120,17 +123,17 @@ GameManager.start_countdown_timer(duration: float, callback: Callable)
 
 ```gdscript
 func hit_target(target_position: Vector2):
-    var base_points = 10
-    var time_bonus = calculate_time_bonus()  # 0-10 puntos extra
-    var difficulty_bonus = GameManager.get_difficulty_multiplier()
+	var base_points = 10
+	var time_bonus = calculate_time_bonus()  # 0-10 puntos extra
+	var difficulty_bonus = GameManager.get_difficulty_multiplier()
 
-    var total_points = int((base_points + time_bonus) * difficulty_bonus)
-    score += total_points
+	var total_points = int((base_points + time_bonus) * difficulty_bonus)
+	score += total_points
 
-    # Mostrar popup visual
-    var popup = preload("res://scenes/ui/ScorePopup.tscn").instantiate()
-    add_child(popup)
-    popup.setup(total_points, target_position)
+	# Mostrar popup visual
+	var popup = preload("res://scenes/ui/ScorePopup.tscn").instantiate()
+	add_child(popup)
+	popup.setup(total_points, target_position)
 ```
 
 ## Sistema de Sesiones

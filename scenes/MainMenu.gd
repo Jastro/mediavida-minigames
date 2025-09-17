@@ -50,7 +50,7 @@ func _on_minigames_button_pressed():
 func _on_quit_button_pressed():
 	get_tree().quit()
 
-func _on_score_changed(new_score: int):
+func _on_score_changed(_new_score: int):
 	update_stats_display()
 
 func _on_game_over():
