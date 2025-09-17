@@ -110,16 +110,16 @@ custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1")
 text = "JUGAR"
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/MinigamesButton" to="." method="_on_minigames_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/DifficultyContainer/DifficultyOption" to="." method="_on_difficulty_changed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm5cxsnofcafy"]
 
-[ext_resource type="Script" uid="uid://b2srdf5h558y3" path="res://minigames/ClickTheTarget.gd" id="1_8yx4k"]
+[ext_resource type="Script" uid="uid://b2srdf5h558y3" path="res://minigames/ClickTheTarget/ClickTheTarget.gd" id="1_8yx4k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 40.0

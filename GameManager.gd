@@ -85,16 +85,24 @@ func trigger_game_over():
 func scan_minigames():
 	"""Automatically scan for available minigames in the minigames folder"""
 	available_minigames.clear()
-	var dir = DirAccess.open("res://minigames/")
+	const base_dir_path = "res://minigames/"
+	var base_dir = DirAccess.open(base_dir_path)
 	
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
+	if base_dir:
+		base_dir.list_dir_begin()
+		var game_dir_name = base_dir.get_next()
 		
-		while file_name != "":
-			if file_name.ends_with(".tscn"):
-				available_minigames.append("res://minigames/" + file_name)
-			file_name = dir.get_next()
+		while game_dir_name != "":
+			var game_dir = DirAccess.open(base_dir_path + game_dir_name)
+			if(game_dir):
+				game_dir.list_dir_begin()
+				var game_file_name = game_dir.get_next()
+				while(game_file_name):
+					var game_file_name_no_ext = game_file_name.substr(0, game_file_name.find("."))
+					if game_file_name.ends_with(".tscn") and game_file_name_no_ext.to_lower() == game_dir_name.to_lower():
+						available_minigames.append(base_dir_path + game_dir_name + "/" + game_file_name)
+					game_file_name = game_dir.get_next()
+			game_dir_name = base_dir.get_next()
 	
 	print("Found ", available_minigames.size(), " minigames")
 
