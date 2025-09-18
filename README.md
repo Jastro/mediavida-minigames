@@ -94,18 +94,18 @@ GameManager.complete_minigame(won: bool, score: int)  # OBLIGATORIO al terminar
 
 # Herramientas de dificultad
 GameManager.get_difficulty() -> Difficulty
-GameManager.get_reaction_time() -> float  # Tiempo de reacción (1.2-2.5s)
-GameManager.get_spawn_rate() -> float     # Multiplicador de aparición (0.7-1.4)
-GameManager.get_difficulty_multiplier() -> float  # Bonus puntos (0.8-1.5)
+Cualquier multiplicador que necesites, lo puedes hacer en función de la dificultad, p.e. spawn_rate, score, etc
 
 # Feedback visual
 GameManager.show_score_popup(points: int, position: Vector2)
 GameManager.screen_shake(intensity: float, duration: float)
 
 # Audio
-GameManager.play_success_sound()
-GameManager.play_fail_sound()
-GameManager.play_sound(path: String)
+El audio contiene dos canales de audio, SFX y Music. Hay dos funciones para correr tanto sonidos como música, y ambas reciben un enumerado como parámtro. Además se han añadido dos funciones cortas para correr los sonidos de success y fail.
+AudioManager.play_sound(GameManager.ESound.X)
+AudioManager.play_music(GameManager.EMusic.X)
+AudioManager.play_success()
+AudioManager.play_fail()
 
 # Utilidades
 GameManager.start_countdown_timer(duration: float, callback: Callable)
@@ -125,7 +125,7 @@ GameManager.start_countdown_timer(duration: float, callback: Callable)
 func hit_target(target_position: Vector2):
 	var base_points = 10
 	var time_bonus = calculate_time_bonus()  # 0-10 puntos extra
-	var difficulty_bonus = GameManager.get_difficulty_multiplier()
+	var difficulty_bonus = get_difficulty_multiplier() # this is your own function
 
 	var total_points = int((base_points + time_bonus) * difficulty_bonus)
 	score += total_points
@@ -172,11 +172,8 @@ func hit_target(target_position: Vector2):
 
 ## Balanceo de Dificultad
 
-| Dificultad | Tiempo Reacción | Velocidad Spawn | Bonus Puntos |
-|------------|----------------|-----------------|--------------|
-| **Fácil**  | 2.5 segundos   | 0.7x           | 0.8x         |
-| **Normal** | 2.0 segundos   | 1.0x           | 1.0x         |
-| **Difícil**| 1.2 segundos   | 1.4x           | 1.5x         |
+Cada minijuego tiene sus propias características y será trabajo del desarrollo balancear dependiendo del nivel de dificultad
+GameManager.get_difficulty()
 
 ## Contribuir
 

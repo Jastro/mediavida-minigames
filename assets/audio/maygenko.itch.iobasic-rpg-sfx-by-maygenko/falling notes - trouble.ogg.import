@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://7nja0f4hn1un"
+path="res://.godot/imported/falling notes - trouble.ogg-54b67ba66064954f64150c69f8372faf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/maygenko.itch.iobasic-rpg-sfx-by-maygenko/falling notes - trouble.ogg"
+dest_files=["res://.godot/imported/falling notes - trouble.ogg-54b67ba66064954f64150c69f8372faf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

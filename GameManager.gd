@@ -20,10 +20,6 @@ var available_minigames: Array[String] = []
 var played_minigames: Array[String] = []
 var current_minigame_scene: Node = null
 
-# Audio players
-var sfx_player: AudioStreamPlayer
-var music_player: AudioStreamPlayer
-
 # Signals
 signal score_changed(new_score: int)
 signal lives_changed(new_lives: int)
@@ -32,10 +28,6 @@ signal minigame_completed(won: bool, score: int)
 signal difficulty_changed(new_difficulty: Difficulty)
 
 func _ready():
-	sfx_player = AudioStreamPlayer.new()
-	music_player = AudioStreamPlayer.new()
-	add_child(sfx_player)
-	add_child(music_player)
 	load_game_data()
 	scan_minigames()
 
@@ -103,13 +95,11 @@ func scan_minigames():
 						available_minigames.append(base_dir_path + game_dir_name + "/" + game_file_name)
 					game_file_name = game_dir.get_next()
 			game_dir_name = base_dir.get_next()
-	
-	print("Found ", available_minigames.size(), " minigames")
 
 func start_random_minigame():
 	"""Start a random minigame from available ones with current difficulty"""
 	if available_minigames.is_empty():
-		print("No minigames found!")
+		printerr("No minigames found!")
 		return
 
 	# Filtrar minijuegos no jugados
@@ -135,14 +125,13 @@ func complete_minigame(won: bool, score_earned: int = 0):
 
 	if won:
 		games_won += 1
-		play_success_sound()
+		AudioManager.play_success()
 	else:
-		play_fail_sound()
+		AudioManager.play_fail()
 
 	# Actualizar high score si es mayor
 	if score_earned > high_score:
 		high_score = score_earned
-		print("New high score: ", high_score)
 
 	# Siempre volver al menú principal después de un minijuego individual
 	save_game_data()
@@ -188,36 +177,6 @@ func start_countdown_timer(duration: float, callback: Callable) -> Timer:
 	timer.timeout.connect(callback)
 	timer.start()
 	return timer
-
-# === AUDIO FUNCTIONS ===
-
-func play_sound(sound_path: String):
-	"""Play a sound effect"""
-	var sound = load(sound_path) as AudioStream
-	if sound:
-		sfx_player.stream = sound
-		sfx_player.play()
-
-func play_success_sound():
-	"""Play success sound effect"""
-	play_sound("res://audio/sfx/success.ogg")
-
-func play_fail_sound():
-	"""Play failure sound effect"""
-	play_sound("res://audio/sfx/fail.ogg")
-
-func play_music(music_path: String, loop: bool = true):
-	"""Play background music"""
-	var music = load(music_path) as AudioStream
-	if music:
-		music_player.stream = music
-		if music is AudioStreamOggVorbis:
-			music.loop = loop
-		music_player.play()
-
-func stop_music():
-	"""Stop background music"""
-	music_player.stop()
 
 # === VISUAL EFFECTS ===
 
