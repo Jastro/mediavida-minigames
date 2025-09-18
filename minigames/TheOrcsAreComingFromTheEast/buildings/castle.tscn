@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://chqywwpd3831j"]
+
+[ext_resource type="Texture2D" uid="uid://cdj65fixwxsen" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Buildings/Blue Buildings/Castle.png" id="1_jevxh"]
+[ext_resource type="Script" uid="uid://dh4dvjhpw3xre" path="res://minigames/TheOrcsAreComingFromTheEast/buildings/castle.gd" id="2_n56yt"]
+
+[node name="Castle" type="Sprite2D"]
+texture = ExtResource("1_jevxh")
+offset = Vector2(0, -52)
+script = ExtResource("2_n56yt")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -52)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-120, 96, -72, 96, 0, 104, 72, 96, 120, 96, 136, 80, 136, 40, -136, 40, -136, 80)
