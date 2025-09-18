@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://7ujy3f0hlnlk"]
-
-[ext_resource type="Script" uid="uid://dvgyrljbavkye" path="res://minigames/RidoTest/rido_test.gd" id="1_gejnx"]
-
-[node name="RidoTest" type="Node2D"]
-script = ExtResource("1_gejnx")

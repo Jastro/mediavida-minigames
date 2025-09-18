@@ -136,6 +136,16 @@ func hit_target(target_position: Vector2):
 	popup.setup(total_points, target_position)
 ```
 
+### 5. Input de usuario
+
+Para los inputs de usuario se utilizaran 4 acciones posibles:
+- "action1" -> q
+- "action2" -> w
+- "action3" -> e
+- "special" -> espacio
+
+Estos mapeos podrán cambiar en el futuro, pero en el código se utilizarán los nombres dados (action1|2|3 y special)
+
 ## Sistema de Sesiones
 
 ### Flujo del Juego:
