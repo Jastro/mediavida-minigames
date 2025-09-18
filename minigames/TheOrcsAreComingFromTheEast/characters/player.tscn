@@ -1,10 +1,12 @@
-[gd_scene load_steps=30 format=3 uid="uid://cvvk8w1em8g64"]
+[gd_scene load_steps=37 format=3 uid="uid://cvvk8w1em8g64"]
 
 [ext_resource type="Script" uid="uid://dt18q6lpmcd1a" path="res://minigames/TheOrcsAreComingFromTheEast/characters/player.gd" id="1_gpbae"]
 [ext_resource type="Texture2D" uid="uid://bfxxwhk656ubx" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Black Units/Warrior/Warrior_Idle.png" id="1_xp4vt"]
 [ext_resource type="Texture2D" uid="uid://bb3aygbqoplol" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Black Units/Warrior/Warrior_Attack1.png" id="2_hilbe"]
 [ext_resource type="Texture2D" uid="uid://paag4v02tte7" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Black Units/Warrior/Warrior_Attack2.png" id="3_ta0yh"]
 [ext_resource type="Texture2D" uid="uid://bg6ap7076mjcq" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Black Units/Warrior/Warrior_Run.png" id="3_w2yxo"]
+[ext_resource type="PackedScene" uid="uid://6g3cxi8ybguy" path="res://scenes/utils/hitbox/hurtbox.tscn" id="6_ta0yh"]
+[ext_resource type="PackedScene" uid="uid://csio4khb4adbp" path="res://scenes/utils/hitbox/hitbox.tscn" id="7_cum8a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sp1"]
 atlas = ExtResource("2_hilbe")
@@ -111,7 +113,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack1",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -128,7 +130,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack2",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -157,7 +159,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -180,11 +182,54 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
-"speed": 12.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnptl"]
 size = Vector2(34, 21.2925)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cum8a"]
+size = Vector2(42, 23)
+
+[sub_resource type="Animation" id="Animation_ta0yh"]
+resource_name = "Hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 2, 1, 2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.8039216, 0, 0.3647059, 0.67058825), Color(1, 1, 1, 1), Color(0.8039216, 0, 0.3647059, 0.67058825), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cum8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbwdc"]
+_data = {
+&"Hurt": SubResource("Animation_ta0yh"),
+&"RESET": SubResource("Animation_cum8a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbwdc"]
+size = Vector2(64, 113)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_gpbae")
@@ -192,7 +237,7 @@ script = ExtResource("1_gpbae")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_oyemk")
-animation = &"Attack2"
+animation = &"Run"
 autoplay = "Idle"
 offset = Vector2(0, -22.06)
 
@@ -202,3 +247,30 @@ shape = SubResource("RectangleShape2D_wnptl")
 debug_color = Color(0.65229535, 0.519007, 0.0072165322, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Hurtbox" parent="." instance=ExtResource("6_ta0yh")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_cum8a")
+debug_color = Color(0.9771206, 0, 0.410246, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_xbwdc")
+}
+
+[node name="Pivot" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -9)
+
+[node name="Hitbox" parent="Pivot" instance=ExtResource("7_cum8a")]
+unique_name_in_owner = true
+position = Vector2(32, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_xbwdc")
+debug_color = Color(0.4529335, 0.44957334, 1, 0.41960785)
