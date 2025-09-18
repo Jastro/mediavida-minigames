@@ -41,7 +41,7 @@ func start_game():
 	targets_hit = 0
 	time_left = 10.0
 
-	var spawn_rate = 1.5 / GameManager.get_spawn_rate()
+	var spawn_rate = 1.5 / get_spawn_rate()
 	spawn_timer.wait_time = spawn_rate
 	spawn_timer.start()
 
@@ -132,7 +132,7 @@ func spawn_target():
 
 	# Tiempo de vida ajustado por dificultad
 	var base_lifetime = 1.5  # 1.5 segundos base
-	var difficulty_multiplier = GameManager.get_reaction_time() / 2.0  # Ajustado por dificultad
+	var difficulty_multiplier = get_reaction_time() / 2.0  # Ajustado por dificultad
 	var lifetime_timer = Timer.new()
 	lifetime_timer.wait_time = base_lifetime * difficulty_multiplier
 	lifetime_timer.one_shot = true
@@ -154,7 +154,7 @@ func hit_target(target: Area2D):
 	targets_hit += 1
 	print("Targets hit: ", targets_hit)
 
-	var reaction_time = GameManager.get_reaction_time()
+	var reaction_time = get_reaction_time()
 	var time_bonus = 0
 	for child in target.get_children():
 		if child is Timer:
@@ -162,7 +162,7 @@ func hit_target(target: Area2D):
 			break
 
 	var base_points = 10
-	var difficulty_multiplier = GameManager.get_difficulty_multiplier()
+	var difficulty_multiplier = get_difficulty_multiplier()
 	var points = int((base_points + time_bonus) * difficulty_multiplier)
 
 	score += points
@@ -234,3 +234,39 @@ func end_game():
 	await get_tree().create_timer(3.0).timeout
 
 	GameManager.complete_minigame(won, score)
+
+func get_reaction_time() -> float:
+	"""Get reaction time based on difficulty (for minigames)"""
+	match GameManager.get_difficulty():
+		GameManager.Difficulty.EASY:
+			return 2.5  # 2.5 seconds
+		GameManager.Difficulty.NORMAL:
+			return 2.0  # 2.0 seconds
+		GameManager.Difficulty.HARD:
+			return 1.2  # 1.2 seconds
+		_:
+			return 2.0
+
+func get_spawn_rate() -> float:
+	"""Get spawn rate multiplier based on difficulty"""
+	match GameManager.get_difficulty():
+		GameManager.Difficulty.EASY:
+			return 0.7  # Slower spawning
+		GameManager.Difficulty.NORMAL:
+			return 1.0  # Normal rate
+		GameManager.Difficulty.HARD:
+			return 1.4  # Faster spawning
+		_:
+			return 1.0
+			
+func get_difficulty_multiplier() -> float:
+	"""Get difficulty multiplier for scoring"""
+	match GameManager.get_difficulty():
+		GameManager.Difficulty.EASY:
+			return 0.8
+		GameManager.Difficulty.NORMAL:
+			return 1.0
+		GameManager.Difficulty.HARD:
+			return 1.5
+		_:
+			return 1.0
