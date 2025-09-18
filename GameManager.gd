@@ -174,30 +174,6 @@ func get_difficulty_name() -> String:
 		_:
 			return "Normal"
 
-func get_reaction_time() -> float:
-	"""Get reaction time based on difficulty (for minigames)"""
-	match current_difficulty:
-		Difficulty.EASY:
-			return 2.5  # 2.5 seconds
-		Difficulty.NORMAL:
-			return 2.0  # 2.0 seconds
-		Difficulty.HARD:
-			return 1.2  # 1.2 seconds
-		_:
-			return 2.0
-
-func get_spawn_rate() -> float:
-	"""Get spawn rate multiplier based on difficulty"""
-	match current_difficulty:
-		Difficulty.EASY:
-			return 0.7  # Slower spawning
-		Difficulty.NORMAL:
-			return 1.0  # Normal rate
-		Difficulty.HARD:
-			return 1.4  # Faster spawning
-		_:
-			return 1.0
-
 func create_minigame_timer(duration: float = 30.0) -> Timer:
 	"""Create a standard minigame timer"""
 	var timer = Timer.new()
@@ -311,18 +287,6 @@ func get_win_rate() -> float:
 	if total_games_played == 0:
 		return 0.0
 	return float(games_won) / float(total_games_played) * 100.0
-
-func get_difficulty_multiplier() -> float:
-	"""Get difficulty multiplier for scoring"""
-	match current_difficulty:
-		Difficulty.EASY:
-			return 0.8
-		Difficulty.NORMAL:
-			return 1.0
-		Difficulty.HARD:
-			return 1.5
-		_:
-			return 1.0
 
 func show_game_complete_screen():
 	"""Show congratulations screen when all minigames are completed"""
