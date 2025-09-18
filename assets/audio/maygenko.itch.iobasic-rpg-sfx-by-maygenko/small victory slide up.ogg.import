@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mkfey0lig736"
+path="res://.godot/imported/small victory slide up.ogg-caf72793089e2cafd56a474f19f92a38.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/maygenko.itch.iobasic-rpg-sfx-by-maygenko/small victory slide up.ogg"
+dest_files=["res://.godot/imported/small victory slide up.ogg-caf72793089e2cafd56a474f19f92a38.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

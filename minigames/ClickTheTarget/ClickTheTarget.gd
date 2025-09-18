@@ -17,7 +17,6 @@ var is_game_active: bool = false
 var active_targets: Array[Area2D] = []
 
 func _ready():
-	print("ClickTheTarget: _ready() called")
 	target_template.visible = false
 	instructions.visible = true
 	game_over_label.visible = false
@@ -27,9 +26,6 @@ func _ready():
 	for child in $UI.get_children():
 		if child is Control:
 			child.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	print("Target template: ", target_template)
-	print("Target template has collision shape: ", target_template.has_node("CollisionShape2D"))
 
 	await get_tree().create_timer(2.0).timeout
 	start_game()
@@ -117,16 +113,10 @@ func spawn_target():
 	targets_container.add_child(new_target)
 	active_targets.append(new_target)
 
-	print("Target spawned at position: ", new_target.position)
-	print("Active targets count: ", active_targets.size())
-
 	# Conectar señal para detectar clics
 	new_target.input_event.connect(func(_viewport, event, _shape_idx):
-		print("Input event detected on target")
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			print("Left click detected!")
 			if is_game_active and new_target in active_targets:
-				print("Hit target confirmed!")
 				hit_target(new_target)
 	)
 
@@ -149,11 +139,9 @@ func animate_target_spawn(target: Area2D):
 
 
 func hit_target(target: Area2D):
-	print("HIT_TARGET CALLED!")
 	active_targets.erase(target)
 	targets_hit += 1
-	print("Targets hit: ", targets_hit)
-
+	
 	var reaction_time = get_reaction_time()
 	var time_bonus = 0
 	for child in target.get_children():
@@ -190,8 +178,6 @@ func _on_target_expired(target: Area2D):
 		var popup = preload("res://scenes/ui/ScorePopup.tscn").instantiate()
 		add_child(popup)
 		popup.setup(penalty, target.position)
-
-		print("Target missed! Score penalty: ", penalty)
 
 		var tween = create_tween()
 		tween.tween_property(target, "modulate", Color(0.5, 0.5, 0.5, 0), 0.3)
