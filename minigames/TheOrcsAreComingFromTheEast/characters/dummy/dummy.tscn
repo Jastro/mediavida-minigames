@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtc12ytx27vx8"]
+[gd_scene load_steps=10 format=3 uid="uid://dtc12ytx27vx8"]
 
 [ext_resource type="Texture2D" uid="uid://ckb26netgrl04" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/Armored/Hited/Hited1.png" id="1_iwdah"]
 [ext_resource type="Texture2D" uid="uid://cf5nxyx5mwxqc" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/Armored/Hited/Hited2.png" id="2_tbb7k"]
 [ext_resource type="Texture2D" uid="uid://btlik2evjw00n" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/Armored/Hited/Hited3.png" id="3_2oonm"]
 [ext_resource type="Texture2D" uid="uid://yxpdrj77kmjn" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/Armored/Hited/Hited4.png" id="4_vs25a"]
 [ext_resource type="Texture2D" uid="uid://bgijlv2ilc5av" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/Armored/Hited/Hited5.png" id="5_oq4s5"]
+[ext_resource type="Script" uid="uid://bxx3tbbcasi6b" path="res://minigames/TheOrcsAreComingFromTheEast/characters/dummy/dummy.gd" id="6_2oonm"]
 [ext_resource type="PackedScene" uid="uid://6g3cxi8ybguy" path="res://scenes/utils/hitbox/hurtbox.tscn" id="6_tbb7k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6mmeg"]
@@ -38,6 +39,7 @@ sprite_frames = SubResource("SpriteFrames_6mmeg")
 animation = &"Hurt"
 frame = 4
 frame_progress = 1.0
+script = ExtResource("6_2oonm")
 
 [node name="Hurtbox" parent="." instance=ExtResource("6_tbb7k")]
 
