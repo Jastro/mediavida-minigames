@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsbqx337ua8b6"]
+
+[ext_resource type="Script" uid="uid://c450dyul76c27" path="res://minigames/TheOrcsAreComingFromTheEast/gui/hearts_container.gd" id="1_bv0cb"]
+
+[node name="HeartsContainer" type="HBoxContainer"]
+size_flags_horizontal = 10
+script = ExtResource("1_bv0cb")

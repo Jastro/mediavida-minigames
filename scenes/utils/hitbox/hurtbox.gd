@@ -18,6 +18,7 @@ func set_new_mask(new_mask : int):
 
 func disable_permanent():
 	collision_mask = 0
+	timer.stop()
 
 func disable(time):
 	collision_mask = 0

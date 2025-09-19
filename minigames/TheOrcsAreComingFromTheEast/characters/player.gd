@@ -1,8 +1,12 @@
 extends CharacterBody2D
+
+signal Hurt(current_hp)
+
 enum EState {
 	Free,
 	Attacking,
 	Hurt,
+	Dead,
 }
 
 const PLAYER_MASK : int = 2
@@ -22,7 +26,12 @@ var external_impulse = Vector2.ZERO
 var state : EState = EState.Free
 var difficulty : GameManager.Difficulty
 
+var current_hp	= 1
+var max_hp		= 1
+
 func _ready():
+	var mat : ShaderMaterial = %Animation.material
+	mat.set_shader_parameter("percent", 0)
 	difficulty = GameManager.get_difficulty()
 	%Animation.animation_finished.connect(_on_animation_finished)
 	%Hitbox.set_new_layer(PLAYER_MASK)
@@ -35,12 +44,12 @@ func _input(event):
 	if(event.is_action_pressed("action1")):
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack1")
-		%Hitbox.enable(0.8)
+		%Hitbox.enable(0.4)
 		state = EState.Attacking
 	elif(event.is_action_pressed("action2")):
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack2")
-		%Hitbox.enable(0.8)
+		%Hitbox.enable(0.4)
 		state = EState.Attacking
 	elif(event.is_action_pressed("special")):
 		if(desired_velocity.length() > MOV_THRESHOLD):
@@ -81,3 +90,23 @@ func _on_hurt(source):
 	external_impulse = source.global_position.direction_to(global_position) * HURT_IMPULSE
 	%AnimationPlayer.play("Hurt")
 	%Hurtbox.disable(1)
+	current_hp = clamp(current_hp - 0.25, 0, max_hp)
+	Hurt.emit(current_hp)
+	if(current_hp == 0):
+		%Hurtbox.disable_permanent()
+		die()
+
+func die():
+	state = EState.Dead
+	set_physics_process(false)
+	set_process_input(false)
+	%Animation.stop()
+	var tween = create_tween()
+	tween.tween_method(_animate_death, 0.0, 1.0, 0.5)
+	tween.play()
+	await tween.finished
+	%Animation.visible = false
+
+func _animate_death(percent : float):
+	var mat : ShaderMaterial = %Animation.material
+	mat.set_shader_parameter("percent", percent)
