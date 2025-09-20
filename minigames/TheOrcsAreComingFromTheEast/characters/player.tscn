@@ -18,7 +18,7 @@ noise = SubResource("FastNoiseLite_4l16t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77sp1"]
 shader = ExtResource("2_4l16t")
 shader_parameter/noise = SubResource("NoiseTexture2D_77sp1")
-shader_parameter/percent = 1.0
+shader_parameter/percent = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sp1"]
 atlas = ExtResource("2_hilbe")

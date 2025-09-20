@@ -30,6 +30,8 @@ var current_hp	= 1
 var max_hp		= 1
 
 func _ready():
+	collision_layer = PLAYER_MASK
+	collision_mask = 1 # we collide with the environment only
 	var mat : ShaderMaterial = %Animation.material
 	mat.set_shader_parameter("percent", 0)
 	difficulty = GameManager.get_difficulty()
