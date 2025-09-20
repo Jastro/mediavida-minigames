@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0vmoudv5o2sk"]
+
+[ext_resource type="Texture2D" uid="uid://o8arx3k5hj3i" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Red Units/Archer/Arrow.png" id="1_rfe5x"]
+[ext_resource type="Script" uid="uid://dsw6qrauqe585" path="res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow.gd" id="2_3i1p4"]
+
+[node name="Arrow" type="Sprite2D"]
+texture = ExtResource("1_rfe5x")
+script = ExtResource("2_3i1p4")
