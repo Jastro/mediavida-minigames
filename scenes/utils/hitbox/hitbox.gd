@@ -19,3 +19,6 @@ func disable():
 func enable(time):
 	collision_layer = layer
 	timer.start(time)
+
+func enable_permanent():
+	collision_layer = layer

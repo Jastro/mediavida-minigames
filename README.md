@@ -112,13 +112,35 @@ AudioManager.play_fail()
 # Utilidades
 GameManager.start_countdown_timer(duration: float, callback: Callable)
 
-# Defs
-Defs es un singleton que contiene definiciones del entorno y algunas elecciones globales para todos los devs.
-
-Por ejemplo, las capas 1,2,3 y 31 estan reservadas para environment, player, enemigos y interactuadores respectivamente.
 ```
 
-### 3. Requisitos Obligatorios
+### 3. Singletons y utils
+Los elementos dentro de scenes\autoloads son elementos creados para tener funcionalidad común para todos los devs. Todo lo que entre aquí será funcionalidad relativamente usada por todos y cada uno de los devs.
+
+A diferencia de los singletons, las utilidades dentro de scenes\utils serán utilidades que los usuarios podrán o no usar, por lo que no estarán cargadas siempre durante los juegos, es elección del jugador usarlas o no.
+
+Por este motivo, se desaconseja añadir singletons concretos para juegos siempre y cuando esto pueda evitarse.
+
+#### Singletons
+
+##### AudioManager
+
+Contiene funcionalidad para gestionar el apartado de audio de los juegos. Hay dos funciones básicas a usar:
+	
+	AudioManager.play_music
+	AudioManager.play_sound
+
+Ambas reciben un enumerado (AudioManager.EMusic y AudioManager.ESound respectivamente). Si quieres meter más sonidos/música solo tienes que añadir el enumerado y actualizar el diccionario que hay para música y sonido con el path al fichero de sonido.
+
+Hay dos funciones extras para que no tengas que escribir AudioManager.play_sound(AudioManager.ESound.Sucess) o fail, que son play_sucess y play_fail
+
+##### Defs
+
+Defs es un singleton que contiene definiciones del entorno y algunas elecciones globales para todos los devs.
+
+Por ejemplo, las capas 1,2,3 y 31 estan reservadas para environment, player, enemigos e interactuadores respectivamente.
+
+### 4. Requisitos Obligatorios
 
 1. **Duración**: 10 segundos por minijuego
 2. **Condición de victoria clara** (ej: puntuación mínima, objetivos completados)
@@ -126,7 +148,7 @@ Por ejemplo, las capas 1,2,3 y 31 estan reservadas para environment, player, ene
 4. **Llamada final**: `GameManager.complete_minigame(won, score)`
 5. **UI no intrusiva**: Usa `mouse_filter = IGNORE` en elementos decorativos
 
-### 4. Ejemplo Práctico: Sistema de Puntos
+### 5. Ejemplo Práctico: Sistema de Puntos
 
 ```gdscript
 func hit_target(target_position: Vector2):
@@ -143,7 +165,7 @@ func hit_target(target_position: Vector2):
 	popup.setup(total_points, target_position)
 ```
 
-### 5. Input de usuario
+### 6. Input de usuario
 
 Para los inputs de usuario se utilizaran 4 acciones posibles:
 - "action1" -> q
