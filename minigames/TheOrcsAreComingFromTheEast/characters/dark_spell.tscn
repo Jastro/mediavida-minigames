@@ -1,0 +1,152 @@
+[gd_scene load_steps=23 format=3 uid="uid://fxvbfnnw2jvn"]
+
+[ext_resource type="Texture2D" uid="uid://irwg6ikylgq5" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pimen.itch.io/Dark VFX 1 (40x32).png" id="1_p58h4"]
+[ext_resource type="PackedScene" uid="uid://csio4khb4adbp" path="res://scenes/utils/hitbox/hitbox.tscn" id="2_jtgnf"]
+[ext_resource type="Script" uid="uid://6vkn7shubisb" path="res://minigames/TheOrcsAreComingFromTheEast/characters/dark_spell.gd" id="2_t76cd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtgnf"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(0, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t76cd"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(40, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2owy"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(80, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv601"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(120, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpekc"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(160, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt61j"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(200, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dncls"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(240, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lvxx"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(280, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkyr4"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(320, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn0et"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(360, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80mqi"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(0, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fevkm"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(40, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j3w6"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(80, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3wp4"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(120, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtmut"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(160, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ec1k"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(200, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihtb3"]
+atlas = ExtResource("1_p58h4")
+region = Rect2(240, 32, 40, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2oaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtgnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t76cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2owy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv601")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpekc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt61j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dncls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lvxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkyr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn0et")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80mqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fevkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j3w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3wp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtmut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ec1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihtb3")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t76cd"]
+size = Vector2(15, 17)
+
+[node name="DarkSpell" type="AnimatedSprite2D"]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_j2oaa")
+animation = &"destroy"
+script = ExtResource("2_t76cd")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_jtgnf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4.5, 0.5)
+shape = SubResource("RectangleShape2D_t76cd")

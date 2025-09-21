@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmd65brvdqu5q"]
+[gd_scene load_steps=22 format=3 uid="uid://dmd65brvdqu5q"]
 
 [ext_resource type="Texture2D" uid="uid://c51i13gphb6l5" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Red Units/Archer/Archer_Idle.png" id="1_ktjjs"]
 [ext_resource type="Texture2D" uid="uid://chcjavtodaknn" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Red Units/Archer/Archer_Shoot.png" id="2_nf61f"]
 [ext_resource type="Script" uid="uid://docgontg1xaua" path="res://minigames/TheOrcsAreComingFromTheEast/characters/archer/archer.gd" id="3_nf61f"]
+[ext_resource type="PackedScene" uid="uid://6g3cxi8ybguy" path="res://scenes/utils/hitbox/hurtbox.tscn" id="4_fpd4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpd4k"]
 atlas = ExtResource("1_ktjjs")
@@ -118,11 +119,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktjjs"]
 radius = 500.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw4fj"]
+size = Vector2(28, 24)
+
 [node name="Archer" type="AnimatedSprite2D"]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_o7mhh")
 animation = &"Shoot"
 frame = 5
+offset = Vector2(0, -20)
 script = ExtResource("3_nf61f")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -139,3 +144,8 @@ shape = SubResource("CircleShape2D_ktjjs")
 [node name="ArrowPosition" type="Marker2D" parent="Pivot"]
 unique_name_in_owner = true
 position = Vector2(44, -31)
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_fpd4k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_yw4fj")
