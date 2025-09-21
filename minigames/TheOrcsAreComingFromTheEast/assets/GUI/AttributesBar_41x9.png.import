@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ben2g6mb4ogci"
-path="res://.godot/imported/Heart.png-56922e6045a12121f5dc0f3fbd604764.ctex"
+uid="uid://cyivbom4p7lf3"
+path="res://.godot/imported/AttributesBar_41x9.png-c18143a0c8a188789af5c5c17cf7933d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://minigames/TheOrcsAreComingFromTheEast/assets/Heart/Heart.png"
-dest_files=["res://.godot/imported/Heart.png-56922e6045a12121f5dc0f3fbd604764.ctex"]
+source_file="res://minigames/TheOrcsAreComingFromTheEast/assets/GUI/AttributesBar_41x9.png"
+dest_files=["res://.godot/imported/AttributesBar_41x9.png-c18143a0c8a188789af5c5c17cf7933d.ctex"]
 
 [params]
 
