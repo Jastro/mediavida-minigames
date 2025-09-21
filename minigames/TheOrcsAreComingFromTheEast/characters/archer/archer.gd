@@ -32,6 +32,8 @@ func _ready():
 	timer.autostart = false
 	timer.timeout.connect(_on_shoot)
 	add_child(timer)
+	$Hurtbox.set_new_mask(Defs.L_PLAYER)
+	$Hurtbox.hurt.connect(_on_hurt)
 	
 func _on_player_detected(player_scene):
 	player = player_scene
@@ -49,7 +51,7 @@ func _on_shoot():
 	flip_h = player.global_position.x < global_position.x
 	$Pivot.scale.x = -1 if flip_h else 1
 	shoot()
-	
+
 func shoot():
 	if(animation == "Idle" || !is_playing()):
 		play("Shoot")
@@ -58,3 +60,18 @@ func shoot():
 		arrow_path.shoot_arrow(%ArrowPosition.global_position, player.global_position)
 		await arrow_path.finished
 		timer.start()
+
+func _on_hurt(_source):
+	$Area2D.collision_mask = 0
+	timer.stop()
+	var tween = create_tween()
+	stop()
+	tween.tween_property(self, "modulate", Color(2, 0, 0, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(2, 0, 0, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.1)
+	tween.play()
+	await tween.finished
+	visible = false
+	queue_free()
