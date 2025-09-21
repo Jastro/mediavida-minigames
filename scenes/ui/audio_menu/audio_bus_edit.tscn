@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx0dy1v1hlivj"]
+
+[ext_resource type="Script" uid="uid://bo76di5ka3aqx" path="res://scenes/ui/audio_menu/audio_bus_edit.gd" id="1_bvhmv"]
+
+[node name="AudioBusEdit" type="HBoxContainer"]
+script = ExtResource("1_bvhmv")
+
+[node name="Left" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_type_variation = &"LeftArrow"
+text = "<"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+
+[node name="Right" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_type_variation = &"RightArrow"
+text = ">"

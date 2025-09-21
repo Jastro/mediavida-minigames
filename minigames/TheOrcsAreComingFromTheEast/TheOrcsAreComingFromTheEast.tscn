@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://7ujy3f0hlnlk"]
+[gd_scene load_steps=17 format=4 uid="uid://7ujy3f0hlnlk"]
 
 [ext_resource type="Script" uid="uid://dvgyrljbavkye" path="res://minigames/TheOrcsAreComingFromTheEast/the_orcs_are_coming_from_the_east.gd" id="1_3n4kn"]
 [ext_resource type="TileSet" uid="uid://b1jc17l35e47a" path="res://minigames/TheOrcsAreComingFromTheEast/resources/TheOrcsAreComingFromTheEastTileset.tres" id="2_n6pc4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Theme" uid="uid://d4bokxt780flg" path="res://resources/themes/etahoshi.tres" id="10_fsjeq"]
 [ext_resource type="Texture2D" uid="uid://irwg6ikylgq5" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pimen.itch.io/Dark VFX 1 (40x32).png" id="12_400fk"]
 [ext_resource type="Texture2D" uid="uid://dgbteo3wprn4r" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/FX/HitFX/2/HitFX3.png" id="12_oyemk"]
+[ext_resource type="Script" uid="uid://rma17asduuqk" path="res://minigames/TheOrcsAreComingFromTheEast/gui/spell_icon.gd" id="13_wnptl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyemk"]
 atlas = ExtResource("12_400fk")
@@ -191,25 +192,33 @@ layout_mode = 2
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/SlashContainer"]
+[node name="Slash" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/SlashContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+max_value = 1.0
+step = 0.05
 fill_mode = 5
 nine_patch_stretch = true
 texture_under = ExtResource("12_oyemk")
 texture_progress = ExtResource("12_oyemk")
 tint_under = Color(1, 1, 1, 0.2)
+script = ExtResource("13_wnptl")
 
 [node name="DarkSpellContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 
 [node name="DarkSpell" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/DarkSpellContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+max_value = 1.0
+step = 0.05
 fill_mode = 5
 nine_patch_stretch = true
 texture_under = SubResource("AtlasTexture_oyemk")
 texture_progress = SubResource("AtlasTexture_wnptl")
 tint_under = Color(1, 1, 1, 0.2)
+script = ExtResource("13_wnptl")
 
 [editable path="Elements/Environment/Rocks/Rock2"]
 [editable path="Elements/Environment/Rocks/Rock3"]
