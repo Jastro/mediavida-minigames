@@ -3,13 +3,11 @@ extends AnimatedSprite2D
 @export var time_up = 1
 @export var time_down = 1
 
-const ENEMY_MASK : int = 4
-
 var up = false
 var timer
 
 func _ready():
-	$Hitbox.set_new_layer(ENEMY_MASK)
+	$Hitbox.set_new_layer(Defs.L_ENEMY)
 	timer			= Timer.new()
 	timer.one_shot	= true
 	add_child(timer)

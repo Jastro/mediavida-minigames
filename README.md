@@ -28,6 +28,8 @@ mediavida-minigames/
 │   └── GameComplete.tscn          # Pantalla de completado
 ├── scenes/ui/                     # Componentes de interfaz
 │   └── ScorePopup.tscn            # Popup animado de puntuación
+├── scenes/utils                   # Escenas con funcionalidad para usar por los devs
+├── scenes/autoloads               # Singletons usados para funcionalidad generica comun (audio, definiciones generales, etc). Evita crear nuevos singletons puesto que estos se cargan para todos los juegos.
 └── audio/sfx/                     # Efectos de sonido
 ```
 
@@ -109,6 +111,11 @@ AudioManager.play_fail()
 
 # Utilidades
 GameManager.start_countdown_timer(duration: float, callback: Callable)
+
+# Defs
+Defs es un singleton que contiene definiciones del entorno y algunas elecciones globales para todos los devs.
+
+Por ejemplo, las capas 1,2,3 y 31 estan reservadas para environment, player, enemigos y interactuadores respectivamente.
 ```
 
 ### 3. Requisitos Obligatorios

@@ -9,9 +9,6 @@ enum EState {
 	Dead,
 }
 
-const PLAYER_MASK : int = 2
-const ENEMY_MASK : int = 4
-
 const MOV_THRESHOLD = 7;
 const DASH_STRENGTH = {
 	GameManager.Difficulty.EASY		: 1900,
@@ -30,14 +27,14 @@ var current_hp	= 1
 var max_hp		= 1
 
 func _ready():
-	collision_layer = PLAYER_MASK
+	collision_layer = Defs.L_PLAYER
 	collision_mask = 1 # we collide with the environment only
 	var mat : ShaderMaterial = %Animation.material
 	mat.set_shader_parameter("percent", 0)
 	difficulty = GameManager.get_difficulty()
 	%Animation.animation_finished.connect(_on_animation_finished)
-	%Hitbox.set_new_layer(PLAYER_MASK)
-	%Hurtbox.set_new_mask(ENEMY_MASK)
+	%Hitbox.set_new_layer(Defs.L_PLAYER)
+	%Hurtbox.set_new_mask(Defs.L_ENEMY)
 	%Hurtbox.hurt.connect(_on_hurt)
 	
 	%Hitbox.disable() # By default disable until we attack

@@ -1,6 +1,5 @@
 extends AnimatedSprite2D
 
-const PLAYER_MASK	: int = 2
 const EXTENDED_RANGE: int = 25
 
 var player : CharacterBody2D = null
@@ -25,7 +24,7 @@ func _ready():
 	get_parent().call_deferred("add_child", arrow_path) # potentially we want archers to be able to move without moving all the arrows with them
 	(%CollisionShape2D.shape as CircleShape2D).radius = RANGE[GameManager.get_difficulty()]
 	$Area2D.body_entered.connect(_on_player_detected)
-	$Area2D.collision_mask	= PLAYER_MASK
+	$Area2D.collision_mask	= Defs.L_PLAYER
 	$Area2D.collision_layer = 0
 	timer			=  Timer.new()
 	timer.wait_time = FREQ[GameManager.get_difficulty()]
@@ -44,7 +43,7 @@ func _on_shoot():
 		player = null
 	
 	if(player == null):
-		$Area2D.collision_mask = PLAYER_MASK
+		$Area2D.collision_mask = Defs.L_PLAYER
 		timer.stop()
 		return
 	flip_h = player.global_position.x < global_position.x
