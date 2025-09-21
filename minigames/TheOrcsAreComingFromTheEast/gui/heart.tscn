@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://cc3xf02oit720"]
 
-[ext_resource type="Texture2D" uid="uid://ben2g6mb4ogci" path="res://minigames/TheOrcsAreComingFromTheEast/assets/Heart/Heart.png" id="1_jddtn"]
+[ext_resource type="Texture2D" uid="uid://dfkm7e51fdhck" path="res://minigames/TheOrcsAreComingFromTheEast/assets/GUI/HeartIcons_32x32.png" id="1_jddtn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dyku7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7krw0"]
 atlas = ExtResource("1_jddtn")
-region = Rect2(0, 0, 20, 20)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5yt8"]
 atlas = ExtResource("1_jddtn")
-region = Rect2(20, 0, 20, 20)
+region = Rect2(0, 0, 32, 32)
 
 [node name="Heart" type="TextureProgressBar"]
 max_value = 1.0
 step = 0.25
 fill_mode = 5
-texture_under = SubResource("AtlasTexture_dyku7")
+texture_under = SubResource("AtlasTexture_7krw0")
 texture_progress = SubResource("AtlasTexture_j5yt8")
