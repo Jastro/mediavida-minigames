@@ -334,3 +334,9 @@ position = Vector2(32, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox"]
 shape = SubResource("RectangleShape2D_xbwdc")
 debug_color = Color(0.4529335, 0.44957334, 1, 0.41960785)
+
+[node name="SlashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DarkSpellTimer" type="Timer" parent="."]
+one_shot = true

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal Hurt(current_hp)
+signal Cooldown(time, spell)
 
 enum EState {
 	Free,
@@ -30,6 +31,19 @@ var max_hp		= {
 	GameManager.Difficulty.NORMAL	: 2,
 	GameManager.Difficulty.HARD		: 1,
 }
+var dark_spell_cooldown = {
+	GameManager.Difficulty.EASY		: 4,
+	GameManager.Difficulty.NORMAL	: 7,
+	GameManager.Difficulty.HARD		: 9,
+}
+var slash_cooldown = {
+	GameManager.Difficulty.EASY		: 0.1,
+	GameManager.Difficulty.NORMAL	: 0.2,
+	GameManager.Difficulty.HARD		: 0.4,
+}
+
+var slash_on_cooldown		= false
+var dark_spell_on_cooldown	= false
 
 func _ready():
 	dark_spell_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/dark_spell.tscn")
@@ -44,14 +58,19 @@ func _ready():
 	%Hurtbox.hurt.connect(_on_hurt)
 	%Hitbox.disable() # By default disable until we attack
 	current_hp = get_max_hp()
+	$SlashTimer.timeout.connect(_on_slash_reuse)
+	$DarkSpellTimer.timeout.connect(_on_dark_spell_reuse)
 
 func _input(event):
-	if(event.is_action_pressed("action1")):
+	if(event.is_action_pressed("action1") and !slash_on_cooldown):
+		slash_on_cooldown = true
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack1")
 		%Hitbox.enable(0.4)
 		state = EState.Attacking
-	elif(event.is_action_pressed("action2")):
+		Cooldown.emit(slash_cooldown[GameManager.get_difficulty()], 0)
+	elif(event.is_action_pressed("action2") and !dark_spell_on_cooldown):
+		dark_spell_on_cooldown = true
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack2")
 		%Hitbox.enable(0.4)
@@ -61,6 +80,7 @@ func _input(event):
 		dark_spell.flip_h = $Animation.flip_h
 		get_parent().add_child(dark_spell)
 		dark_spell.global_position = global_position + dark_spell.direction * 100 + Vector2.UP * 25
+		Cooldown.emit(dark_spell_cooldown[GameManager.get_difficulty()], 1)
 	elif(event.is_action_pressed("special")):
 		if(desired_velocity.length() > MOV_THRESHOLD):
 			external_impulse += desired_velocity.normalized() * DASH_STRENGTH[difficulty]
@@ -96,7 +116,11 @@ func animate():
 			
 func _on_animation_finished():
 	match %Animation.animation:
-		"Attack1", "Attack2":
+		"Attack1":
+			$SlashTimer.start(slash_cooldown[GameManager.get_difficulty()])
+			state = EState.Free
+		"Attack2":
+			$DarkSpellTimer.start(dark_spell_cooldown[GameManager.get_difficulty()])
 			state = EState.Free
 
 func _on_hurt(source):
@@ -123,3 +147,8 @@ func die():
 func _animate_death(percent : float):
 	var mat : ShaderMaterial = %Animation.material
 	mat.set_shader_parameter("percent", percent)
+	
+func _on_slash_reuse():
+	slash_on_cooldown		= false
+func _on_dark_spell_reuse():
+	dark_spell_on_cooldown	= false
