@@ -14,11 +14,11 @@ func _ready():
 	
 	var difficulty = GameManager.get_difficulty()
 	match difficulty:
-		0:
+		GameManager.Difficulty.EASY:
 			fall_speed = base_speed * 1.0
-		1:
+		GameManager.Difficulty.NORMAL:
 			fall_speed = base_speed * 2.0
-		2:
+		GameManager.Difficulty.HARD:
 			fall_speed = base_speed * 3.0
 
 func _process(delta):

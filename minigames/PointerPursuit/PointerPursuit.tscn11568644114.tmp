@@ -15,26 +15,16 @@ color = Color(0.0705882, 0.0784314, 0.129412, 1)
 position = Vector2(576, 324)
 
 [node name="Body" type="ColorRect" parent="Chaser"]
-layout_mode = 0
 offset_left = -45.0
 offset_top = -32.0
 offset_right = 45.0
 offset_bottom = 32.0
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
 
 [node name="UI" type="Control" parent="."]
 z_index = 10
-z_as_relative = false
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+anchors_preset = 0
 
 [node name="TopBar" type="Panel" parent="UI"]
 modulate = Color(0.129412, 0.145098, 0.203922, 0.9)
@@ -89,7 +79,9 @@ offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 28
-text = "Evita que el rectángulo te alcance.\nMantén el cursor dentro del área.\nEl perseguidor será cada vez más grande y rápido."
+text = "Evita que el rectángulo te alcance.
+Mantén el cursor dentro del área.
+El perseguidor será cada vez más grande y rápido."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -108,6 +100,5 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = ""
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -40,20 +40,20 @@ func _ready():
 func apply_difficulty_settings():
 	match GameManager.get_difficulty():
 		GameManager.Difficulty.EASY:
-			base_speed = 220.0
-			speed_ramp = 45.0
-			chase_responsiveness = 3.2
-			scale_step = 0.08
+			base_speed = 400.0
+			speed_ramp = 80.0
+			chase_responsiveness = 6.2
+			scale_step = 0.24
 		GameManager.Difficulty.NORMAL:
-			base_speed = 260.0
-			speed_ramp = 55.0
-			chase_responsiveness = 4.0
-			scale_step = 0.1
+			base_speed = 500.0
+			speed_ramp = 90.0
+			chase_responsiveness = 7.2
+			scale_step = 0.34
 		GameManager.Difficulty.HARD:
-			base_speed = 300.0
-			speed_ramp = 70.0
-			chase_responsiveness = 5.2
-			scale_step = 0.14
+			base_speed = 600.0
+			speed_ramp = 100.0
+			chase_responsiveness = 8.2
+			scale_step = 0.44
 
 func setup_chaser_visual():
 	chaser.position = PLAY_AREA.size * 0.5
@@ -137,10 +137,13 @@ func end_minigame(won: bool, message: String):
 	var time_survived := minf(elapsed_time, TOTAL_TIME)
 	var final_score := calculate_final_score(time_survived)
 	score_label.text = "Puntos: %d" % final_score
-	status_label.text = won ? "Estado: ¡Sobreviviste!" : "Estado: Fin del juego"
+	if won:
+		status_label.text = "Estado: ¡Sobreviviste!"
+	else:
+		status_label.text = "Estado: Fin del juego"
 
-        result_label.visible = true
-        result_label.text = message + "\nPuntuación: " + str(final_score)
+	result_label.visible = true
+	result_label.text = message + "\nPuntuación: " + str(final_score)
 
 	await get_tree().create_timer(2.0).timeout
 	GameManager.complete_minigame(won, final_score)
