@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bln2yok6epjbf"]
+[gd_scene load_steps=9 format=3 uid="uid://bln2yok6epjbf"]
 
 [ext_resource type="Script" uid="uid://dpochmmrkk1pr" path="res://minigames/DodgeTheDrop/dodge_the_drop.gd" id="1_ukd48"]
 [ext_resource type="Script" uid="uid://dpett0n2bdxsn" path="res://minigames/DodgeTheDrop/player.gd" id="2_ugcg6"]
@@ -7,6 +7,42 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x67ft"]
 size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1b7xq"]
+bg_color = Color(0.066667, 0.066667, 0.105882, 0.854902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.192157, 0.533333, 0.843137, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xx4tf"]
+bg_color = Color(0.043137, 0.043137, 0.066667, 0.862745)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.192157, 0.533333, 0.843137, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjkbm"]
+bg_color = Color(0.043137, 0.043137, 0.066667, 0.87451)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.866667, 0.639216, 0.152941, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="DodgeTheDrop" type="Node2D"]
 script = ExtResource("1_ukd48")
@@ -26,15 +62,72 @@ texture = ExtResource("3_crrl4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_x67ft")
 
-[node name="ScoreLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ResultLabel" type="Label" parent="."]
-visible = false
-offset_left = 320.0
-offset_top = 360.0
-offset_right = 360.0
-offset_bottom = 383.0
+[node name="UIRoot" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScorePanel" type="PanelContainer" parent="UI/UIRoot"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 284.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1b7xq")
+
+[node name="ScoreLabel" type="Label" parent="UI/UIRoot/ScorePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "Puntuación: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StartPanel" type="PanelContainer" parent="UI/UIRoot"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -188.0
+offset_right = 270.0
+offset_bottom = -44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xx4tf")
+
+[node name="StartLabel" type="Label" parent="UI/UIRoot/StartPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.866667, 0.952941, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "¡Usa Q o E ,  y esquiva las rocas!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="ResultPanel" type="PanelContainer" parent="UI/UIRoot"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -110.0
+offset_right = 300.0
+offset_bottom = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjkbm")
+
+[node name="ResultLabel" type="Label" parent="UI/UIRoot/ResultPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.909804, 0.678431, 1)
+theme_override_font_sizes/font_size = 36
+text = "¡Superaste la tormenta!
+Puntuación final: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1

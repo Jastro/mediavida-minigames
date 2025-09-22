@@ -31,5 +31,6 @@ func _process(delta):
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		GameManager.screen_shake(100.0, 1)
+
 		if game_scene:
 			game_scene.end_game(false)

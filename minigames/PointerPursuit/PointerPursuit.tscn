@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmg8h6o0vd7p"]
+
+[ext_resource type="Script" uid="uid://cq1onmhc8x7t5" path="res://minigames/PointerPursuit/PointerPursuit.gd" id="1_6gwtm"]
+[ext_resource type="AudioStream" uid="uid://blotpbo14yir0" path="res://minigames/PointerPursuit/assets/Chase.ogg" id="2_sfn3h"]
+
+[node name="PointerPursuit" type="Node2D"]
+script = ExtResource("1_6gwtm")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.0705882, 0.0784314, 0.129412, 1)
+
+[node name="Chaser" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Body" type="ColorRect" parent="Chaser"]
+visible = false
+offset_left = -45.0
+offset_top = -32.0
+offset_right = 45.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="UI" type="Control" parent="."]
+z_index = 10
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="Panel" parent="UI"]
+modulate = Color(0.129412, 0.145098, 0.203922, 0.9)
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="ScoreLabel" type="Label" parent="UI/TopBar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Puntos: 0"
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="UI/TopBar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Tiempo: 10.0"
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="UI/TopBar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.870588, 0.909804, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Estado: Prepárate"
+vertical_alignment = 1
+
+[node name="Instructions" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -120.0
+offset_right = 260.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Evita que el rectángulo te alcance.
+Mantén el cursor dentro del área.
+El perseguidor será cada vez más grande y rápido."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -100.0
+offset_right = 260.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sfn3h")
+autoplay = true
