@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://fbv32ibow6id"]
+
+[ext_resource type="Texture2D" uid="uid://1gpiiotexrhs" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pixel-poem.itch.io-dungeon-assetpuck/peaks_3.png" id="1_57fi8"]
+[ext_resource type="Texture2D" uid="uid://d2y54wnvl5t85" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pixel-poem.itch.io-dungeon-assetpuck/peaks_4.png" id="2_chdx6"]
+[ext_resource type="Texture2D" uid="uid://d2a7qbnf14rc2" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pixel-poem.itch.io-dungeon-assetpuck/peaks_2.png" id="3_pj4cs"]
+[ext_resource type="Texture2D" uid="uid://doxdsl6pg6efv" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pixel-poem.itch.io-dungeon-assetpuck/peaks_1.png" id="4_w3mg8"]
+[ext_resource type="PackedScene" uid="uid://csio4khb4adbp" path="res://scenes/utils/hitbox/hitbox.tscn" id="5_chdx6"]
+[ext_resource type="Script" uid="uid://c43vusyagkw3k" path="res://minigames/TheOrcsAreComingFromTheEast/environment/spikes/spikes.gd" id="5_pj4cs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8gwb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_57fi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_chdx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pj4cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3mg8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj4cs"]
+size = Vector2(16, 16)
+
+[node name="Spikes" type="AnimatedSprite2D"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_g8gwb")
+offset = Vector2(0, 14)
+script = ExtResource("5_pj4cs")
+
+[node name="Hitbox" parent="." instance=ExtResource("5_chdx6")]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pj4cs")

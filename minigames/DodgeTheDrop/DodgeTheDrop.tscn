@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bln2yok6epjbf"]
+
+[ext_resource type="Script" uid="uid://dpochmmrkk1pr" path="res://minigames/DodgeTheDrop/dodge_the_drop.gd" id="1_ukd48"]
+[ext_resource type="Script" uid="uid://dpett0n2bdxsn" path="res://minigames/DodgeTheDrop/player.gd" id="2_ugcg6"]
+[ext_resource type="Texture2D" uid="uid://ku0auqi24jgw" path="res://minigames/DodgeTheDrop/assets/pixil-frame-0.png" id="3_crrl4"]
+[ext_resource type="PackedScene" uid="uid://dwrkep45jtuq8" path="res://minigames/DodgeTheDrop/Obstacle.tscn" id="4_icip1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x67ft"]
+size = Vector2(16, 16)
+
+[node name="DodgeTheDrop" type="Node2D"]
+script = ExtResource("1_ukd48")
+obstacle_scene = ExtResource("4_icip1")
+
+[node name="Obstacle" parent="." instance=ExtResource("4_icip1")]
+collision_layer = 2
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(320, 640)
+collision_mask = 2
+script = ExtResource("2_ugcg6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("3_crrl4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_x67ft")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ResultLabel" type="Label" parent="."]
+visible = false
+offset_left = 320.0
+offset_top = 360.0
+offset_right = 360.0
+offset_bottom = 383.0
+horizontal_alignment = 1
+vertical_alignment = 1

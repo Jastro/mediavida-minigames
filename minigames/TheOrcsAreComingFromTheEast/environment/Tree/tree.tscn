@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgj63qj6i6lkr"]
+
+[ext_resource type="Texture2D" uid="uid://b0kdnrgg3478k" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Decorations/Trees/Tree1.png" id="1_pprpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvmjk"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etmvj"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(192, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udkw1"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(384, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkgka"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(576, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtnrv"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(768, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_surj3"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(960, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwc4y"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(1152, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfgxd"]
+atlas = ExtResource("1_pprpv")
+region = Rect2(1344, 0, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uh3b0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvmjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etmvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udkw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkgka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtnrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_surj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwc4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfgxd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n34pn"]
+size = Vector2(36, 36)
+
+[node name="Tree" type="StaticBody2D"]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uh3b0")
+frame_progress = 0.006683576
+offset = Vector2(0, -94.765)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_n34pn")

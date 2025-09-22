@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyptpgk8wejld"]
+
+[ext_resource type="Script" uid="uid://dxgv24g7gwyro" path="res://arrow_path.gd" id="1_62wsd"]
+
+[sub_resource type="Curve2D" id="Curve2D_llfw7"]
+
+[node name="ArrowPath" type="Path2D"]
+y_sort_enabled = true
+curve = SubResource("Curve2D_llfw7")
+script = ExtResource("1_62wsd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+unique_name_in_owner = true

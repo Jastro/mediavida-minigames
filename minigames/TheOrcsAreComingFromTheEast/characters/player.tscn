@@ -18,7 +18,7 @@ noise = SubResource("FastNoiseLite_4l16t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77sp1"]
 shader = ExtResource("2_4l16t")
 shader_parameter/noise = SubResource("NoiseTexture2D_77sp1")
-shader_parameter/percent = 1.0
+shader_parameter/percent = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sp1"]
 atlas = ExtResource("2_hilbe")
@@ -334,3 +334,9 @@ position = Vector2(32, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox"]
 shape = SubResource("RectangleShape2D_xbwdc")
 debug_color = Color(0.4529335, 0.44957334, 1, 0.41960785)
+
+[node name="SlashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DarkSpellTimer" type="Timer" parent="."]
+one_shot = true

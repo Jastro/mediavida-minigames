@@ -14,8 +14,12 @@ func set_new_layer(new_mask : int):
 	collision_layer = layer
 
 func disable():
-	collision_layer = 0
+	set_deferred("monitorable", false)
 
 func enable(time):
-	collision_layer = layer
+	set_deferred("monitorable", true)
 	timer.start(time)
+
+func enable_permanent():
+	set_deferred("monitorable", true)
+	collision_layer = layer

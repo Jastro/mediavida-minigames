@@ -10,9 +10,13 @@ enum EMusic {
 }
 
 enum EBus {
-	SFX, Music
+	Master, SFX, Music
 }
-
+var BusToString = {
+	EBus.Master : "Master",
+	EBus.SFX	: "SFX",
+	EBus.Music	: "Music",
+}
 var SOUND_PATH = {
 	ESound.Success	: "res://assets/audio/maygenko.itch.iobasic-rpg-sfx-by-maygenko/small victory slide up.ogg",
 	ESound.Fail		: "res://assets/audio/maygenko.itch.iobasic-rpg-sfx-by-maygenko/falling notes - trouble.ogg",
@@ -62,3 +66,6 @@ func stop_music():
 
 func _on_sound_finished():
 	queue_free()
+
+func get_bus(bus : EBus):
+	return BusToString[bus]

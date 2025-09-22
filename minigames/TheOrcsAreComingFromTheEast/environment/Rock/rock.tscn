@@ -1,0 +1,183 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqohrguhtsdpw"]
+
+[ext_resource type="Texture2D" uid="uid://v5v0hwqlgnvl" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Decorations/Rocks/Rock2.png" id="1_r148s"]
+[ext_resource type="Texture2D" uid="uid://2eay0pwkwbh2" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Decorations/Rocks/Rock4.png" id="2_4w3xj"]
+[ext_resource type="Texture2D" uid="uid://b48dqjvsxfwwm" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Decorations/Rocks/Rock3.png" id="3_cnmvw"]
+[ext_resource type="Texture2D" uid="uid://bsvb1trb5ia71" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Decorations/Rocks/Rock1.png" id="4_vs3r7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h1tn"]
+atlas = ExtResource("4_vs3r7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpmhq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r148s")
+}],
+"loop": true,
+"name": &"Big",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4w3xj")
+}],
+"loop": true,
+"name": &"Large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cnmvw")
+}],
+"loop": true,
+"name": &"Medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h1tn")
+}],
+"loop": true,
+"name": &"Small",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2a4x"]
+size = Vector2(43, 20)
+
+[sub_resource type="Animation" id="Animation_hwjrw"]
+resource_name = "Big"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(43, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Big"]
+}
+
+[sub_resource type="Animation" id="Animation_8jfir"]
+resource_name = "Large"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(46, 22)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Large"]
+}
+
+[sub_resource type="Animation" id="Animation_5fl88"]
+resource_name = "Small"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Small"]
+}
+
+[sub_resource type="Animation" id="Animation_lm5bl"]
+resource_name = "Medium"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(43, 20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Medium"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8kii1"]
+_data = {
+&"Big": SubResource("Animation_hwjrw"),
+&"Large": SubResource("Animation_8jfir"),
+&"Medium": SubResource("Animation_lm5bl"),
+&"Small": SubResource("Animation_5fl88")
+}
+
+[node name="Rock" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wpmhq")
+animation = &"Big"
+offset = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_f2a4x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8kii1")
+}

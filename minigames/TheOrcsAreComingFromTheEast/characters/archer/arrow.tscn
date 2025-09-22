@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0vmoudv5o2sk"]
+
+[ext_resource type="Texture2D" uid="uid://o8arx3k5hj3i" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TinySwords/Units/Red Units/Archer/Arrow.png" id="1_rfe5x"]
+[ext_resource type="Script" uid="uid://dsw6qrauqe585" path="res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow.gd" id="2_3i1p4"]
+[ext_resource type="PackedScene" uid="uid://csio4khb4adbp" path="res://scenes/utils/hitbox/hitbox.tscn" id="3_e8yw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eje31"]
+size = Vector2(43, 20)
+
+[node name="Arrow" type="Sprite2D"]
+texture = ExtResource("1_rfe5x")
+script = ExtResource("2_3i1p4")
+
+[node name="Hitbox" parent="." instance=ExtResource("3_e8yw0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_eje31")
