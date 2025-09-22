@@ -45,7 +45,7 @@ func _on_difficulty_changed(index: int):
 	GameManager.set_difficulty(index as GameManager.Difficulty)
 
 func _on_minigames_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/MinigamesList.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/MiniGamesMenu/MinigamesList.tscn")
 
 func _on_quit_button_pressed():
 	get_tree().quit()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyptpgk8wejld"]
 
-[ext_resource type="Script" uid="uid://dxgv24g7gwyro" path="res://arrow_path.gd" id="1_62wsd"]
+[ext_resource type="Script" uid="uid://dxgv24g7gwyro" path="res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow_path.gd" id="1_62wsd"]
 
 [sub_resource type="Curve2D" id="Curve2D_llfw7"]
 
