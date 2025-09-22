@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cx0dy1v1hlivj"]
 
-[ext_resource type="Script" uid="uid://bo76di5ka3aqx" path="res://scenes/ui/audio_menu/audio_bus_edit.gd" id="1_bvhmv"]
+[ext_resource type="Script" uid="uid://bo76di5ka3aqx" path="res://scenes/ui/audio_bus_volume/audio_bus_edit.gd" id="1_bvhmv"]
 
 [node name="AudioBusEdit" type="HBoxContainer"]
 script = ExtResource("1_bvhmv")
