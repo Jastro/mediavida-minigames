@@ -139,8 +139,8 @@ func end_minigame(won: bool, message: String):
 	score_label.text = "Puntos: %d" % final_score
 	status_label.text = won ? "Estado: ¡Sobreviviste!" : "Estado: Fin del juego"
 
-	result_label.visible = true
-	result_label.text = "%s\nPuntuación: %d" % [message, final_score]
+result_label.visible = true
+result_label.text = message + "\nPuntuación: " + str(final_score)
 
 	await get_tree().create_timer(2.0).timeout
 	GameManager.complete_minigame(won, final_score)
