@@ -13,7 +13,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	GameManager.start_countdown_timer(time_left, _on_minigame_timeout)
 	is_game_active = true
-	print("Dificultad: %d" % GameManager.get_difficulty())
+	# print("Dificultad: %d" % GameManager.get_difficulty())
 	spawn_obstacles()
 
 func spawn_obstacles():
