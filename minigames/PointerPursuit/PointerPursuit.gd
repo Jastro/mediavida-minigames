@@ -54,7 +54,6 @@ func apply_difficulty_settings():
 			speed_ramp = 100.0
 			chase_responsiveness = 8.2
 			scale_step = 0.44
-main
 
 func setup_chaser_visual():
 	chaser.position = PLAY_AREA.size * 0.5
