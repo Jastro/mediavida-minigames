@@ -8,6 +8,7 @@ extends Control
 @onready var quit_button = $VBoxContainer/ButtonsContainer/QuitButton
 
 func _ready():
+	randomize()
 	setup_difficulty_options()
 	update_stats_display()
 
