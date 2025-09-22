@@ -20,11 +20,11 @@ func spawn_obstacles():
 	obstacle_timer = Timer.new()
 	# Ajustamos el tiempo entre rocas según la dificultad
 	match GameManager.get_difficulty():
-		0:
+		GameManager.Difficulty.EASY:
 			obstacle_timer.wait_time = 0.25
-		1:
+		GameManager.Difficulty.NORMAL:
 			obstacle_timer.wait_time = 0.10
-		2:
+		GameManager.Difficulty.HARD:
 			obstacle_timer.wait_time = 0.05
 
 	obstacle_timer.autostart = true
