@@ -35,6 +35,7 @@ func _ready():
 	instructions_label.visible = true
 	result_label.visible = false
 	await get_tree().create_timer(2.0).timeout
+	chaser_body.visible = true
 	start_minigame()
 
 func apply_difficulty_settings():
@@ -144,6 +145,7 @@ func end_minigame(won: bool, message: String):
 
 	result_label.visible = true
 	result_label.text = message + "\nPuntuación: " + str(final_score)
+	chaser_body.visible = false
 
 	await get_tree().create_timer(2.0).timeout
 	GameManager.complete_minigame(won, final_score)
