@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://7ujy3f0hlnlk"]
+[gd_scene load_steps=21 format=4 uid="uid://7ujy3f0hlnlk"]
 
 [ext_resource type="Script" uid="uid://dvgyrljbavkye" path="res://minigames/TheOrcsAreComingFromTheEast/the_orcs_are_coming_from_the_east.gd" id="1_3n4kn"]
 [ext_resource type="TileSet" uid="uid://b1jc17l35e47a" path="res://minigames/TheOrcsAreComingFromTheEast/resources/TheOrcsAreComingFromTheEastTileset.tres" id="2_n6pc4"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dgbteo3wprn4r" path="res://minigames/TheOrcsAreComingFromTheEast/assets/TrainingDummy/FX/HitFX/2/HitFX3.png" id="12_oyemk"]
 [ext_resource type="Script" uid="uid://rma17asduuqk" path="res://minigames/TheOrcsAreComingFromTheEast/gui/spell_icon.gd" id="13_wnptl"]
 [ext_resource type="PackedScene" uid="uid://babei37hjddqh" path="res://minigames/TheOrcsAreComingFromTheEast/gui/audio_menu/audio_menu.tscn" id="15_1pga4"]
+[ext_resource type="Texture2D" uid="uid://1jb8o0umi2t7" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pimen.itch.io/Smoke VFX 1.png" id="16_6lqgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyemk"]
 atlas = ExtResource("12_400fk")
@@ -24,6 +25,10 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnptl"]
 atlas = ExtResource("12_400fk")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svb4w"]
+atlas = ExtResource("16_6lqgc")
+region = Rect2(17, 12, 32, 23)
 
 [node name="TheOrcsAreComingFromTheEast" type="Node2D"]
 y_sort_enabled = true
@@ -90,6 +95,30 @@ position = Vector2(1861, -105)
 
 [node name="Spikes3" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
 position = Vector2(1722, -17)
+
+[node name="Spikes4" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(2694, -848)
+difficulty_requisite = 1
+
+[node name="Spikes5" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(2998, -848)
+difficulty_requisite = 1
+
+[node name="Spikes6" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(3005, -906)
+difficulty_requisite = 2
+
+[node name="Spikes7" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(2691, -912)
+difficulty_requisite = 2
+
+[node name="Spikes8" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(2792, -848)
+difficulty_requisite = 2
+
+[node name="Spikes9" parent="Elements/Environment/Spikes4" instance=ExtResource("4_j5yt8")]
+position = Vector2(2903, -848)
+difficulty_requisite = 2
 
 [node name="Rocks" type="Node2D" parent="Elements/Environment"]
 y_sort_enabled = true
@@ -224,6 +253,44 @@ texture_under = SubResource("AtlasTexture_oyemk")
 texture_progress = SubResource("AtlasTexture_wnptl")
 tint_under = Color(1, 1, 1, 0.2)
 script = ExtResource("13_wnptl")
+
+[node name="DashContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+
+[node name="Dash" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/DashContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_svb4w")
+texture_progress = SubResource("AtlasTexture_svb4w")
+tint_under = Color(1, 1, 1, 0.2)
+script = ExtResource("13_wnptl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 9.0
+offset_top = 117.0
+offset_right = 199.0
+offset_bottom = 157.0
+theme_override_constants/separation = 66
+
+[node name="Q" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+text = "Q"
+
+[node name="W" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+text = "W"
+
+[node name="SPC" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+text = "SPC"
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 2

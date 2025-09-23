@@ -25,7 +25,10 @@ Defs="*res://scenes/autoloads/Defs.gd"
 
 folder_colors={
 "res://minigames/": "red",
+"res://minigames/ChooseTheCard/": "yellow",
 "res://minigames/ClickTheTarget/": "orange",
+"res://minigames/DodgeTheDrop/": "pink",
+"res://minigames/PointerPursuit/": "purple",
 "res://minigames/TheOrcsAreComingFromTheEast/": "teal"
 }
 

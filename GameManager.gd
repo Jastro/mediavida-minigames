@@ -124,6 +124,7 @@ func start_random_minigame():
 
 func complete_minigame(won: bool, score_earned: int = 0):
 	"""Call this when a minigame finishes"""
+	AudioManager.stop_music()
 	total_games_played += 1
 
 	if won:

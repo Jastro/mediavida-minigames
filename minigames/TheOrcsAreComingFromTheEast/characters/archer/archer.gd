@@ -2,6 +2,8 @@ extends AnimatedSprite2D
 
 const EXTENDED_RANGE: int = 25
 
+var blood_vfx_scn : PackedScene
+
 var player : CharacterBody2D = null
 var timer
 var arrow_path : Path2D
@@ -18,7 +20,8 @@ var FREQ = {
 }
 
 func _ready():
-	var arrow_path_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow_path.tscn") as PackedScene
+	var arrow_path_scn : PackedScene = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow_path.tscn") as PackedScene
+	blood_vfx_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/Particles/blood_vfx.tscn") as PackedScene
 	play("Idle")
 	arrow_path = arrow_path_scn.instantiate()
 	get_parent().call_deferred("add_child", arrow_path) # potentially we want archers to be able to move without moving all the arrows with them
@@ -65,6 +68,11 @@ func shoot():
 		timer.start()
 
 func _on_hurt(_source):
+	var blood_vfx : GPUParticles2D = blood_vfx_scn.instantiate()
+	get_parent().add_child(blood_vfx)
+	blood_vfx.global_position = global_position
+	blood_vfx.emitting = true
+	
 	$Area2D.collision_mask = 0
 	timer.stop()
 	var tween = create_tween()

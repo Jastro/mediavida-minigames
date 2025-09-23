@@ -10,7 +10,10 @@ func _on_hurt(new_hp):
 	%HeartsContainer.update_hp(new_hp)
 
 func _on_cooldown_spell(time, spell):
-	if(spell == 0):
-		%Slash.set_reuse(time)
-	else:
-		%DarkSpell.set_reuse(time)
+	match spell:
+		0:
+			%Slash.set_reuse(time)
+		1:
+			%DarkSpell.set_reuse(time)
+		2:
+			%Dash.set_reuse(time)

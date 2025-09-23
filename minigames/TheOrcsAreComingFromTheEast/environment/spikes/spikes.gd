@@ -2,11 +2,13 @@ extends AnimatedSprite2D
 
 @export var time_up = 1
 @export var time_down = 1
-
+@export var difficulty_requisite : GameManager.Difficulty = GameManager.Difficulty.EASY
 var up = false
 var timer
 
 func _ready():
+	if(difficulty_requisite > GameManager.get_difficulty()):
+		queue_free()
 	$Hitbox.set_new_layer(Defs.L_ENEMY)
 	timer			= Timer.new()
 	timer.one_shot	= true
