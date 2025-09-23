@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal Hurt(current_hp)
 signal Cooldown(time, spell)
+signal Dead()
 
 enum EState {
 	Free,
@@ -177,8 +178,9 @@ func die():
 	AudioManager.play_sound(AudioManager.ESound.TOE_Death)
 	await tween.finished
 	%Animation.visible = false
-	GameManager.complete_minigame(false, 0)
-	AudioManager.stop_music(true, 1)
+	Dead.emit()
+	
+	
 
 func is_alive() -> bool:
 	return current_hp > 0

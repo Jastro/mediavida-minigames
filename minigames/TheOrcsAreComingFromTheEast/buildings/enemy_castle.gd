@@ -1,5 +1,7 @@
 extends Node2D
 
+signal Destroyed()
+
 var max_hp = {
 	GameManager.Difficulty.EASY		: 8,
 	GameManager.Difficulty.NORMAL	: 12,
@@ -18,7 +20,8 @@ func _on_hurt(_source):
 	$AnimationPlayer.play("Hurt")
 	current_hp = clamp(current_hp-1, 0, max_hp[GameManager.get_difficulty()])
 	if(current_hp == 0):
+		%Hurtbox.disable_permanent()
 		AudioManager.stop_music(true, 1)
 		# TODO: FIRE ANIMATION
 		# TODO: Show score
-		queue_free()
+		Destroyed.emit()
