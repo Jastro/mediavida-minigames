@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbri6kge57s3y"]
+
+[ext_resource type="PackedScene" uid="uid://chqywwpd3831j" path="res://minigames/TheOrcsAreComingFromTheEast/buildings/castle.tscn" id="1_c5ywi"]
+[ext_resource type="Script" uid="uid://cy0lvu2bpjpk1" path="res://minigames/TheOrcsAreComingFromTheEast/buildings/enemy_castle.gd" id="1_w1mhp"]
+[ext_resource type="PackedScene" uid="uid://dmd65brvdqu5q" path="res://minigames/TheOrcsAreComingFromTheEast/characters/archer/archer.tscn" id="2_bctkt"]
+[ext_resource type="PackedScene" uid="uid://6g3cxi8ybguy" path="res://scenes/utils/hitbox/hurtbox.tscn" id="3_bctkt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1mhp"]
+size = Vector2(272, 62)
+
+[sub_resource type="Animation" id="Animation_w1mhp"]
+resource_name = "Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Castle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.100000024, 0.2, 0.3101001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.83458114, 0, 0.29099137, 1), Color(1, 1, 1, 1), Color(0.83458114, 0, 0.29099137, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgcfa"]
+_data = {
+&"Hurt": SubResource("Animation_w1mhp")
+}
+
+[node name="EnemyCastle" type="Node2D"]
+script = ExtResource("1_w1mhp")
+
+[node name="Castle" parent="." instance=ExtResource("1_c5ywi")]
+skin = 2
+
+[node name="Archer" parent="." instance=ExtResource("2_bctkt")]
+position = Vector2(-96, -96)
+
+[node name="CollisionShape2D" parent="Archer/Hurtbox" index="0"]
+disabled = true
+
+[node name="Archer2" parent="." instance=ExtResource("2_bctkt")]
+position = Vector2(96, -96)
+
+[node name="CollisionShape2D" parent="Archer2/Hurtbox" index="0"]
+disabled = true
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_bctkt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 21)
+shape = SubResource("RectangleShape2D_w1mhp")
+debug_color = Color(0.98541826, 0, 0.3385864, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tgcfa")
+}
+
+[editable path="Archer"]
+[editable path="Archer2"]

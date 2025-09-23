@@ -30,7 +30,8 @@ mediavida-minigames/
 │   └── ScorePopup.tscn            # Popup animado de puntuación
 ├── scenes/utils                   # Escenas con funcionalidad para usar por los devs
 ├── scenes/autoloads               # Singletons usados para funcionalidad generica comun (audio, definiciones generales, etc). Evita crear nuevos singletons puesto que estos se cargan para todos los juegos.
-└── audio/sfx/                     # Efectos de sonido
+└── assets/                        # Assets generalmente usados por todos los juegos. Los assets de juegos concretos irán en las carpetas de dichos juegos
+	└── audio                      # Carpeta de audios
 ```
 
 ## Minijuego Incluido: "Click the Target"

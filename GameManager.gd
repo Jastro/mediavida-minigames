@@ -1,31 +1,34 @@
 extends Node
 
-# Game State Variables
-var current_score: int = 0
-var lives: int = 3
-var high_score: int = 0
-var total_games_played: int = 0
-var games_won: int = 0
-
-# Difficulty System
-enum Difficulty {
-	EASY = 0,
-	NORMAL = 1,
-	HARD = 2
-}
-var current_difficulty: Difficulty = Difficulty.NORMAL
-
-# Minigame Management
-var available_minigames: Array[String] = []
-var played_minigames: Array[String] = []
-var current_minigame_scene: Node = null
-
 # Signals
 signal score_changed(new_score: int)
 signal lives_changed(new_lives: int)
 signal game_over
 signal minigame_completed(won: bool, score: int)
 signal difficulty_changed(new_difficulty: Difficulty)
+
+# Difficulty System
+enum Difficulty {
+	EASY	= 0,
+	NORMAL	= 1,
+	HARD	= 2
+}
+
+# Game State Variables
+var current_score		: int = 0
+var lives				: int = 3
+var high_score			: int = 0
+var total_games_played	: int = 0
+var games_won			: int = 0
+
+
+
+var current_difficulty: Difficulty = Difficulty.NORMAL
+
+# Minigame Management
+var available_minigames: Array[String] = []
+var played_minigames: Array[String] = []
+var current_minigame_scene: Node = null
 
 func _ready():
 	load_game_data()

@@ -41,6 +41,9 @@ func _on_player_detected(player_scene):
 	$Area2D.collision_mask = 0
 
 func _on_shoot():
+	if(player.is_dead()):
+		player = null
+		
 	if(player != null and player.global_position.distance_to(global_position) > (RANGE[GameManager.get_difficulty()] + EXTENDED_RANGE)):
 		player = null
 	
@@ -72,6 +75,7 @@ func _on_hurt(_source):
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.1)
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.1)
 	tween.play()
+	AudioManager.play_sound(AudioManager.ESound.TOE_Hurt)
 	await tween.finished
 	visible = false
 	queue_free()

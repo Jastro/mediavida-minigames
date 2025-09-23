@@ -22,12 +22,14 @@ func _ready():
 	timer.timeout.connect(_on_death)
 	add_child(timer)
 	timer.start()
+	AudioManager.play_sound(AudioManager.ESound.TOE_Dark_Spell)
 	
 func _physics_process(delta):
 	global_position += direction * speed * delta
 
 func _on_death():
 	timer.stop()
+	AudioManager.play_sound(AudioManager.ESound.TOE_Explosion)
 	play("destroy")
 
 func _on_animation_finished():
