@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://7ujy3f0hlnlk"]
+[gd_scene load_steps=22 format=4 uid="uid://7ujy3f0hlnlk"]
 
 [ext_resource type="Script" uid="uid://dvgyrljbavkye" path="res://minigames/TheOrcsAreComingFromTheEast/the_orcs_are_coming_from_the_east.gd" id="1_3n4kn"]
 [ext_resource type="TileSet" uid="uid://b1jc17l35e47a" path="res://minigames/TheOrcsAreComingFromTheEast/resources/TheOrcsAreComingFromTheEastTileset.tres" id="2_n6pc4"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://rma17asduuqk" path="res://minigames/TheOrcsAreComingFromTheEast/gui/spell_icon.gd" id="13_wnptl"]
 [ext_resource type="PackedScene" uid="uid://babei37hjddqh" path="res://minigames/TheOrcsAreComingFromTheEast/gui/audio_menu/audio_menu.tscn" id="15_1pga4"]
 [ext_resource type="Texture2D" uid="uid://1jb8o0umi2t7" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pimen.itch.io/Smoke VFX 1.png" id="16_6lqgc"]
+[ext_resource type="PackedScene" uid="uid://e84gvinybi1e" path="res://minigames/TheOrcsAreComingFromTheEast/gui/game_score/game_score.tscn" id="18_svb4w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyemk"]
 atlas = ExtResource("12_400fk")
@@ -154,6 +155,7 @@ position = Vector2(1256, -426)
 animation = &"Large"
 
 [node name="Enemies" type="Node2D" parent="Elements"]
+unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="Archer" parent="Elements/Enemies" instance=ExtResource("4_dyku7")]
@@ -171,11 +173,12 @@ position = Vector2(-324, -140)
 scale = Vector2(2, 2)
 
 [node name="EnemyCastle" parent="Elements" instance=ExtResource("10_gj1v7")]
+unique_name_in_owner = true
 position = Vector2(2846, -889)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="GUI" type="MarginContainer" parent="CanvasLayer"]
+[node name="GUI" type="MarginContainer" parent="GUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -189,44 +192,44 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/GUI"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="GUI/GUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI/GUI/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TopGUI" type="HBoxContainer" parent="CanvasLayer/GUI/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="TopGUI" type="HBoxContainer" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Points" type="Label" parent="CanvasLayer/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
+[node name="Points" type="Label" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Points: 0"
 
-[node name="Label" type="Label" parent="CanvasLayer/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
+[node name="Label" type="Label" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
 layout_mode = 2
 text = "Time Left: 0s"
 
-[node name="HeartsContainer" parent="CanvasLayer/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI" instance=ExtResource("6_mn8qy")]
+[node name="HeartsContainer" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI" instance=ExtResource("6_mn8qy")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/GUI/VBoxContainer"]
 layout_mode = 2
 
-[node name="SlashContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer"]
+[node name="SlashContainer" type="PanelContainer" parent="GUI/GUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 
-[node name="Slash" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/SlashContainer"]
+[node name="Slash" type="TextureProgressBar" parent="GUI/GUI/VBoxContainer/HBoxContainer/SlashContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -238,11 +241,11 @@ texture_progress = ExtResource("12_oyemk")
 tint_under = Color(1, 1, 1, 0.2)
 script = ExtResource("13_wnptl")
 
-[node name="DarkSpellContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer"]
+[node name="DarkSpellContainer" type="PanelContainer" parent="GUI/GUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 
-[node name="DarkSpell" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/DarkSpellContainer"]
+[node name="DarkSpell" type="TextureProgressBar" parent="GUI/GUI/VBoxContainer/HBoxContainer/DarkSpellContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -254,11 +257,11 @@ texture_progress = SubResource("AtlasTexture_wnptl")
 tint_under = Color(1, 1, 1, 0.2)
 script = ExtResource("13_wnptl")
 
-[node name="DashContainer" type="PanelContainer" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer"]
+[node name="DashContainer" type="PanelContainer" parent="GUI/GUI/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 
-[node name="Dash" type="TextureProgressBar" parent="CanvasLayer/GUI/VBoxContainer/HBoxContainer/DashContainer"]
+[node name="Dash" type="TextureProgressBar" parent="GUI/GUI/VBoxContainer/HBoxContainer/DashContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -270,32 +273,39 @@ texture_progress = SubResource("AtlasTexture_svb4w")
 tint_under = Color(1, 1, 1, 0.2)
 script = ExtResource("13_wnptl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
 offset_left = 9.0
 offset_top = 117.0
 offset_right = 199.0
 offset_bottom = 157.0
 theme_override_constants/separation = 66
 
-[node name="Q" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="Q" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 text = "Q"
 
-[node name="W" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="W" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 text = "W"
 
-[node name="SPC" type="Label" parent="CanvasLayer/HBoxContainer"]
+[node name="SPC" type="Label" parent="GUI/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
 text = "SPC"
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="AudioMenu" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="AudioMenu" parent="CanvasLayer2" instance=ExtResource("15_1pga4")]
+[node name="AudioMenu" parent="AudioMenu" instance=ExtResource("15_1pga4")]
+
+[node name="GameScoreEnd" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="GameScore" parent="GameScoreEnd" instance=ExtResource("18_svb4w")]
+unique_name_in_owner = true
+visible = false
 
 [editable path="Elements/Environment/Rocks/Rock2"]
 [editable path="Elements/Environment/Rocks/Rock3"]

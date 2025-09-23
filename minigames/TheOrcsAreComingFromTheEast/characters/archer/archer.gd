@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
 
+signal Dead
+
 const EXTENDED_RANGE: int = 25
 
 var blood_vfx_scn : PackedScene
@@ -86,4 +88,5 @@ func _on_hurt(_source):
 	AudioManager.play_sound(AudioManager.ESound.TOE_Hurt)
 	await tween.finished
 	visible = false
+	Dead.emit()
 	queue_free()
