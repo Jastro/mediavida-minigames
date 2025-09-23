@@ -59,9 +59,9 @@ func end_game(won: bool):
 		is_game_active = false
 		var final_score = round(score)
 		# Mostrar cartel centrado
-		var headline = "¡Ups! ¡Te alcanzó una roca!"
+		var headline = "¡Ups! ¡Te alcanzó un patinete!"
 		if won:
-			headline = "¡Superaste la tormenta!"
+			headline = "¡Superaste la espera!"
 		result_label.text = "%s\nPuntuación final: %d" % [headline, final_score]
 		result_panel.visible = true
 		start_panel.visible = false
