@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhbpyalghyku1"]
+
+[ext_resource type="Texture2D" uid="uid://1jb8o0umi2t7" path="res://minigames/TheOrcsAreComingFromTheEast/assets/pimen.itch.io/Smoke VFX 1.png" id="1_8df3q"]
+[ext_resource type="Script" uid="uid://pw08t6dfuxuv" path="res://minigames/TheOrcsAreComingFromTheEast/characters/smoke_vfx.gd" id="2_32cau"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32cau"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwhn2"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajgkc"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm20i"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl6v3"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81rc2"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iqga"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(288, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qft7p"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(336, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fukx3"]
+atlas = ExtResource("1_8df3q")
+region = Rect2(384, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovsy3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32cau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwhn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajgkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm20i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl6v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81rc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iqga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qft7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fukx3")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 20.0
+}]
+
+[node name="SmokeVFX" type="AnimatedSprite2D"]
+y_sort_enabled = true
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ovsy3")
+animation = &"dash"
+offset = Vector2(-10.87, -14.57)
+script = ExtResource("2_32cau")

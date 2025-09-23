@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7p8u221r0fbe"]
+
+[ext_resource type="Script" uid="uid://qegijcxp5qpt" path="res://minigames/TheOrcsAreComingFromTheEast/Particles/blood_vfx.gd" id="1_ghmg0"]
+
+[sub_resource type="Curve" id="Curve_nbi4b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ghmg0"]
+curve = SubResource("Curve_nbi4b")
+
+[sub_resource type="Curve" id="Curve_3gp51"]
+_limits = [1.5, 2.5, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 2.5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3vkkq"]
+curve = SubResource("Curve_3gp51")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_slvi4"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 500, 0)
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_3vkkq")
+color = Color(0.82290566, 0, 0.17871693, 1)
+alpha_curve = SubResource("CurveTexture_ghmg0")
+
+[node name="BloodVFX" type="GPUParticles2D"]
+y_sort_enabled = true
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_slvi4")
+script = ExtResource("1_ghmg0")

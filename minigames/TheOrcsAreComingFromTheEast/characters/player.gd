@@ -19,11 +19,13 @@ const DASH_STRENGTH = {
 const MAX_IMPULSE	: float = 2500
 const HURT_IMPULSE	: float = 1200
 
-var dark_spell_scn : PackedScene
-var desired_velocity = Vector2.ZERO
-var external_impulse = Vector2.ZERO
-var state : EState = EState.Free
-var difficulty : GameManager.Difficulty
+var dark_spell_scn		: PackedScene
+var smoke_scn			: PackedScene
+var blood_vfx_scn		: PackedScene
+var desired_velocity	: Vector2 = Vector2.ZERO
+var external_impulse	: Vector2 = Vector2.ZERO
+var state				: EState = EState.Free
+var difficulty			: GameManager.Difficulty
 
 var current_hp	= 1
 var max_hp		= {
@@ -41,14 +43,25 @@ var slash_cooldown = {
 	GameManager.Difficulty.NORMAL	: 0.2,
 	GameManager.Difficulty.HARD		: 0.4,
 }
+var dash_cooldown = {
+	GameManager.Difficulty.EASY		: 1.0,
+	GameManager.Difficulty.NORMAL	: 1.5,
+	GameManager.Difficulty.HARD		: 3.0,
+}
+var dash_cooldown_timer : Timer
 
 var slash_on_cooldown		= false
 var dark_spell_on_cooldown	= false
+var dash_on_cooldown		= false
+
+
 
 func _ready():
-	dark_spell_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/dark_spell.tscn")
-	collision_layer = Defs.L_PLAYER
-	collision_mask = 1 # we collide with the environment only
+	dark_spell_scn	= preload("res://minigames/TheOrcsAreComingFromTheEast/characters/dark_spell.tscn")
+	smoke_scn		= preload("res://minigames/TheOrcsAreComingFromTheEast/characters/smoke_vfx.tscn")
+	blood_vfx_scn	= preload("res://minigames/TheOrcsAreComingFromTheEast/Particles/blood_vfx.tscn")
+	collision_layer	= Defs.L_PLAYER
+	collision_mask	= 1 # we collide with the environment only
 	var mat : ShaderMaterial = %Animation.material
 	mat.set_shader_parameter("percent", 0)
 	difficulty = GameManager.get_difficulty()
@@ -60,9 +73,14 @@ func _ready():
 	current_hp = get_max_hp()
 	$SlashTimer.timeout.connect(_on_slash_reuse)
 	$DarkSpellTimer.timeout.connect(_on_dark_spell_reuse)
+	dash_cooldown_timer				= Timer.new()
+	dash_cooldown_timer.one_shot	= true
+	dash_cooldown_timer.wait_time	= dash_cooldown[GameManager.get_difficulty()]
+	dash_cooldown_timer.timeout.connect(_on_dash_cooldown)
+	add_child(dash_cooldown_timer)
 
 func _input(event):
-	if(event.is_action_pressed("action1") and !slash_on_cooldown):
+	if(!slash_on_cooldown and event.is_action_pressed("action1")):
 		slash_on_cooldown = true
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack1")
@@ -70,7 +88,7 @@ func _input(event):
 		state = EState.Attacking
 		Cooldown.emit(slash_cooldown[GameManager.get_difficulty()], 0)
 		AudioManager.play_sound(AudioManager.ESound.TOE_Sword_Slash)
-	elif(event.is_action_pressed("action2") and !dark_spell_on_cooldown):
+	elif(!dark_spell_on_cooldown and event.is_action_pressed("action2")):
 		dark_spell_on_cooldown = true
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
 		%Animation.play("Attack2")
@@ -82,12 +100,20 @@ func _input(event):
 		get_parent().add_child(dark_spell)
 		dark_spell.global_position = global_position + dark_spell.direction * 100 + Vector2.UP * 25
 		Cooldown.emit(dark_spell_cooldown[GameManager.get_difficulty()], 1)
-	elif(event.is_action_pressed("special")):
+	elif(!dash_on_cooldown and event.is_action_pressed("special")):
+		dash_on_cooldown = true
+		dash_cooldown_timer.start()
 		if(desired_velocity.length() > MOV_THRESHOLD):
 			external_impulse += desired_velocity.normalized() * DASH_STRENGTH[difficulty]
 		else:
 			external_impulse += Vector2.RIGHT * DASH_STRENGTH[difficulty] * (-1 if %Animation.flip_h else 1)
+		Cooldown.emit(dash_cooldown[GameManager.get_difficulty()], 2)
 		AudioManager.play_sound(AudioManager.ESound.TOE_Dash)
+		var smoke_vfx : AnimatedSprite2D = smoke_scn.instantiate()
+		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
+		get_parent().add_child(smoke_vfx)
+		smoke_vfx.flip_h = %Animation.flip_h
+		smoke_vfx.global_position = %SmokePosition.global_position + Vector2.DOWN * 16
 	
 func _physics_process(_delta):
 	if(state == EState.Free):
@@ -126,6 +152,10 @@ func _on_animation_finished():
 			state = EState.Free
 
 func _on_hurt(source):
+	var blood_vfx : GPUParticles2D = blood_vfx_scn.instantiate()
+	get_parent().add_child(blood_vfx)
+	blood_vfx.global_position = global_position
+	blood_vfx.emitting = true
 	external_impulse = source.global_position.direction_to(global_position) * HURT_IMPULSE
 	%AnimationPlayer.play("Hurt")
 	AudioManager.play_sound(AudioManager.ESound.TOE_Hurt)
@@ -164,3 +194,5 @@ func _on_slash_reuse():
 	slash_on_cooldown		= false
 func _on_dark_spell_reuse():
 	dark_spell_on_cooldown	= false
+func _on_dash_cooldown():
+	dash_on_cooldown = false
