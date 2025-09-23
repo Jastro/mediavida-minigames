@@ -69,6 +69,7 @@ func _input(event):
 		%Hitbox.enable(0.4)
 		state = EState.Attacking
 		Cooldown.emit(slash_cooldown[GameManager.get_difficulty()], 0)
+		AudioManager.play_sound(AudioManager.ESound.TOE_Sword_Slash)
 	elif(event.is_action_pressed("action2") and !dark_spell_on_cooldown):
 		dark_spell_on_cooldown = true
 		%Pivot.rotation_degrees = 180 if %Animation.flip_h else 0
@@ -86,6 +87,7 @@ func _input(event):
 			external_impulse += desired_velocity.normalized() * DASH_STRENGTH[difficulty]
 		else:
 			external_impulse += Vector2.RIGHT * DASH_STRENGTH[difficulty] * (-1 if %Animation.flip_h else 1)
+		AudioManager.play_sound(AudioManager.ESound.TOE_Dash)
 	
 func _physics_process(_delta):
 	if(state == EState.Free):
@@ -126,6 +128,7 @@ func _on_animation_finished():
 func _on_hurt(source):
 	external_impulse = source.global_position.direction_to(global_position) * HURT_IMPULSE
 	%AnimationPlayer.play("Hurt")
+	AudioManager.play_sound(AudioManager.ESound.TOE_Hurt)
 	%Hurtbox.disable(1)
 	current_hp = clamp(current_hp - 0.25, 0, get_max_hp())
 	Hurt.emit(current_hp)
@@ -141,9 +144,18 @@ func die():
 	var tween = create_tween()
 	tween.tween_method(_animate_death, 0.0, 1.0, 0.5)
 	tween.play()
+	AudioManager.play_sound(AudioManager.ESound.TOE_Death)
 	await tween.finished
 	%Animation.visible = false
+	GameManager.complete_minigame(false, 0)
+	AudioManager.stop_music(true, 1)
 
+func is_alive() -> bool:
+	return current_hp > 0
+
+func is_dead() -> bool:
+	return current_hp == 0
+	
 func _animate_death(percent : float):
 	var mat : ShaderMaterial = %Animation.material
 	mat.set_shader_parameter("percent", percent)

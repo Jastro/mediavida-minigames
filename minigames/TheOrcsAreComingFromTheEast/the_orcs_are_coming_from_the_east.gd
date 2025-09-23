@@ -4,6 +4,7 @@ func _ready():
 	%Player.Hurt.connect(_on_hurt)
 	%HeartsContainer.initialise(%Player.get_max_hp())
 	$%Player.Cooldown.connect(_on_cooldown_spell)
+	AudioManager.play_music(AudioManager.EMusic.Ambient)
 
 func _on_hurt(new_hp):
 	%HeartsContainer.update_hp(new_hp)
