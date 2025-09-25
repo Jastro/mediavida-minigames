@@ -28,6 +28,7 @@ func _on_cooldown_spell(time, spell):
 		2:
 			%Dash.set_reuse(time)
 func _on_win():
+	%Player.disable_hurtbox()
 	castle_destroyed = true
 	show_score()
 

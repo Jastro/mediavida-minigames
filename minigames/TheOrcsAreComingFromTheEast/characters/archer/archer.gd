@@ -18,7 +18,7 @@ var RANGE = {
 var FREQ = {
 	GameManager.Difficulty.EASY		: 1.5,
 	GameManager.Difficulty.NORMAL	: 1.2,
-	GameManager.Difficulty.HARD		: 0.8,
+	GameManager.Difficulty.HARD		: 1.2,
 }
 
 func _ready():

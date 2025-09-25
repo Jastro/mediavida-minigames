@@ -3,7 +3,7 @@ extends AnimatedSprite2D
 const speed : float = 350.0
 
 var lifetime = {
-	GameManager.Difficulty.EASY		: 3,
+	GameManager.Difficulty.EASY		: 2,
 	GameManager.Difficulty.NORMAL	: 1.5,
 	GameManager.Difficulty.HARD		: 1,
 }

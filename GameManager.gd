@@ -31,6 +31,7 @@ var played_minigames: Array[String] = []
 var current_minigame_scene: Node = null
 
 func _ready():
+	randomize()
 	load_game_data()
 	scan_minigames()
 
