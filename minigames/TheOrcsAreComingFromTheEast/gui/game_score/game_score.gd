@@ -25,8 +25,9 @@ func setup(scores, wincon_set):
 		await partial_score.Finished
 		tween.kill()
 		total_score += score["value"] * score["multiplier"]
-
+	%FinishGame.visible = true
 func _on_finish_game():
+	%FinishGame.disabled = true
 	AudioManager.stop_music(true, 1)
 	GameManager.complete_minigame(wincon, total_score)
 

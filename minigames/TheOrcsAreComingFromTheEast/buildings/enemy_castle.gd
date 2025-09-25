@@ -3,9 +3,9 @@ extends Node2D
 signal Destroyed()
 
 var max_hp = {
-	GameManager.Difficulty.EASY		: 8,
-	GameManager.Difficulty.NORMAL	: 12,
-	GameManager.Difficulty.HARD		: 18,
+	GameManager.Difficulty.EASY		: 6,
+	GameManager.Difficulty.NORMAL	: 8,
+	GameManager.Difficulty.HARD		: 8,
 }
 
 var current_hp

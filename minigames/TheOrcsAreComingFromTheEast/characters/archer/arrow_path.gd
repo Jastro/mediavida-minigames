@@ -3,8 +3,9 @@ extends Path2D
 signal finished
 
 var current_arrow	: Sprite2D = null
+var arrow_stopped	: bool = false
 var arrow_scn		: PackedScene
-
+var tween			: Tween = null
 var ARROW_SPEED = {
 	GameManager.Difficulty.EASY		: 900,
 	GameManager.Difficulty.NORMAL	: 1000,
@@ -17,6 +18,7 @@ func _ready():
 func shoot_arrow(origin : Vector2, target : Vector2):
 	var curve_ref = (curve as Curve2D)
 	current_arrow = arrow_scn.instantiate()
+	current_arrow.tree_collision.connect(stop_arrow)
 	
 	origin = origin - global_position
 	target = target - global_position
@@ -40,16 +42,30 @@ func shoot_arrow(origin : Vector2, target : Vector2):
 	curve_ref.add_point(target)
 	
 	%PathFollow2D.add_child(current_arrow)
-	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
+	if(tween != null):
+		tween.kill()
+	tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
 	tween.tween_property(%PathFollow2D, "progress_ratio", 1, time)
 	await tween.finished
-	var current_arrow_pos = current_arrow.global_position
-	var current_arrow_rot = current_arrow.global_rotation
-	%PathFollow2D.remove_child(current_arrow)
-	get_parent().add_child(current_arrow)
-	current_arrow.global_position = current_arrow_pos
-	current_arrow.global_rotation = current_arrow_rot
-	current_arrow.kill()
+	if(arrow_stopped == false):
+		var current_arrow_pos = current_arrow.global_position
+		var current_arrow_rot = current_arrow.global_rotation
+		%PathFollow2D.remove_child(current_arrow)
+		get_parent().add_child(current_arrow)
+		current_arrow.global_position = current_arrow_pos
+		current_arrow.global_rotation = current_arrow_rot
+		current_arrow.kill()
 	current_arrow = null
+	arrow_stopped = false
 	%PathFollow2D.progress_ratio = 0
 	finished.emit()
+
+func stop_arrow():
+	arrow_stopped = true
+	var current_arrow_pos = current_arrow.global_position
+	var current_arrow_rot = current_arrow.global_rotation
+	%PathFollow2D.call_deferred("remove_child", current_arrow)
+	get_parent().call_deferred("add_child", current_arrow)
+	current_arrow.set_deferred("global_position", current_arrow_pos)
+	current_arrow.set_deferred("global_rotation", current_arrow_rot)
+	current_arrow.call_deferred("kill")

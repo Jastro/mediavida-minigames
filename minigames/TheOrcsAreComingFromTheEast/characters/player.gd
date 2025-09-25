@@ -30,24 +30,24 @@ var difficulty			: GameManager.Difficulty
 
 var current_hp	= 1
 var max_hp		= {
-	GameManager.Difficulty.EASY		: 3,
-	GameManager.Difficulty.NORMAL	: 2,
-	GameManager.Difficulty.HARD		: 1,
+	GameManager.Difficulty.EASY		: 5,
+	GameManager.Difficulty.NORMAL	: 4,
+	GameManager.Difficulty.HARD		: 3,
 }
 var dark_spell_cooldown = {
 	GameManager.Difficulty.EASY		: 4,
-	GameManager.Difficulty.NORMAL	: 7,
-	GameManager.Difficulty.HARD		: 9,
+	GameManager.Difficulty.NORMAL	: 5,
+	GameManager.Difficulty.HARD		: 7,
 }
 var slash_cooldown = {
 	GameManager.Difficulty.EASY		: 0.1,
 	GameManager.Difficulty.NORMAL	: 0.2,
-	GameManager.Difficulty.HARD		: 0.4,
+	GameManager.Difficulty.HARD		: 0.3,
 }
 var dash_cooldown = {
 	GameManager.Difficulty.EASY		: 1.0,
 	GameManager.Difficulty.NORMAL	: 1.5,
-	GameManager.Difficulty.HARD		: 3.0,
+	GameManager.Difficulty.HARD		: 2.0,
 }
 var dash_cooldown_timer : Timer
 
@@ -180,7 +180,8 @@ func die():
 	%Animation.visible = false
 	Dead.emit()
 	
-	
+func disable_hurtbox():
+	%Hurtbox.disable_permanent()
 
 func is_alive() -> bool:
 	return current_hp > 0
