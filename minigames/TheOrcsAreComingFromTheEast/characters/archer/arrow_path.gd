@@ -13,6 +13,7 @@ var ARROW_SPEED = {
 }
 
 func _ready():
+	add_to_group("freezable")
 	arrow_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow.tscn")
 	
 func shoot_arrow(origin : Vector2, target : Vector2):
@@ -69,3 +70,7 @@ func stop_arrow():
 	current_arrow.set_deferred("global_position", current_arrow_pos)
 	current_arrow.set_deferred("global_rotation", current_arrow_rot)
 	current_arrow.call_deferred("kill")
+
+func freeze():
+	if(tween != null):
+		tween.pause()

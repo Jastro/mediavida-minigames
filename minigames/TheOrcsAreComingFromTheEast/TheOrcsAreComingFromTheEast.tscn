@@ -534,7 +534,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Points: 0"
 
-[node name="Label" type="Label" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
+[node name="TimeLeft" type="Label" parent="GUI/GUI/VBoxContainer/PanelContainer/MarginContainer/TopGUI"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Time Left: 0s"
 
@@ -626,6 +627,13 @@ layer = 2
 [node name="GameScore" parent="GameScoreEnd" instance=ExtResource("18_svb4w")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+
+[node name="TimeUpdate" type="Timer" parent="."]
+autostart = true
 
 [editable path="Elements/Environment/Rocks/Rock2"]
 [editable path="Elements/Environment/Rocks/Rock3"]
