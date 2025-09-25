@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://bu0o844axatha"]
+
+[ext_resource type="PackedScene" uid="uid://cnc0nmh7eofst" path="res://minigames/RacingZero/HoverCar/hover_car.tscn" id="1_3tt0t"]
+[ext_resource type="Script" uid="uid://b20b8c5tceaht" path="res://minigames/RacingZero/racing_zero_test.gd" id="1_nvolk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nvolk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_apgsi"]
+width = 1024
+height = 1024
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_nvolk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbcj7"]
+albedo_color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+albedo_texture = SubResource("NoiseTexture2D_apgsi")
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8qpc"]
+material = SubResource("StandardMaterial3D_mbcj7")
+size = Vector3(200, 1, 200)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nvolk"]
+data = PackedVector3Array(-100, 0.5, 100, 100, 0.5, 100, -100, -0.5, 100, 100, 0.5, 100, 100, -0.5, 100, -100, -0.5, 100, 100, 0.5, -100, -100, 0.5, -100, 100, -0.5, -100, -100, 0.5, -100, -100, -0.5, -100, 100, -0.5, -100, 100, 0.5, 100, 100, 0.5, -100, 100, -0.5, 100, 100, 0.5, -100, 100, -0.5, -100, 100, -0.5, 100, -100, 0.5, -100, -100, 0.5, 100, -100, -0.5, -100, -100, 0.5, 100, -100, -0.5, 100, -100, -0.5, -100, 100, 0.5, 100, -100, 0.5, 100, 100, 0.5, -100, -100, 0.5, 100, -100, 0.5, -100, 100, 0.5, -100, -100, -0.5, 100, 100, -0.5, 100, -100, -0.5, -100, 100, -0.5, 100, 100, -0.5, -100, -100, -0.5, -100)
+
+[sub_resource type="Environment" id="Environment_3tt0t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nvolk"]
+size = Vector3(1.62, 1, 30)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g1qy4"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3mhfv"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nvolk"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_apgsi"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mbcj7"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g8qpc"]
+points = PackedVector3Array(0.81, 0.5, 14.999998, 0.81, -0.5, 14.999998, 0.81, 0.5, -15, -0.81, 0.5, 14.999998, -0.81, -0.5, 14.999998, 0.81, -0.5, -15, -0.81, 0.5, -15, -0.81, -0.5, -15)
+
+[node name="RacingZeroTest" type="Node3D"]
+script = ExtResource("1_nvolk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_g8qpc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_nvolk")
+
+[node name="HoverCar" parent="." node_paths=PackedStringArray("game_manager") instance=ExtResource("1_3tt0t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.324009, 0)
+game_manager = NodePath("..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3tt0t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.04366, 0, 0, 0, 0.565048, 0.59794325, 0, -0.3582308, 0.94315356, -8.185814, -3.9876003, -1.4402118)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_g1qy4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.04366, 0, 0, 0, 0.3560068, -0.15929948, 0, 0.065326616, 0.8681255, -7.4921913, 2.4335337, 25.641817)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_3mhfv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.6417678e-07, -0.43266654, 0, 6.04366, -1.8912456e-08, 0, 0, 0, 8.075087, 98.2882, 3.3488798, -4.578806)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_nvolk")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.6417678e-07, -0.43266654, 0, 6.04366, -1.8912456e-08, 0, 0, 0, 8.075087, -95.35468, 3.3488798, -4.578806)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D7/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_apgsi")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1547533e-14, 1.8912456e-08, 8.075086, 6.04366, -1.8912456e-08, 0, 2.6417678e-07, 0.43266654, -3.5297322e-07, -3.1216583, 3.3488798, 92.47168)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_mbcj7")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1547533e-14, 1.8912456e-08, 8.075086, 6.04366, -1.8912456e-08, 0, 2.6417678e-07, 0.43266654, -3.5297322e-07, -3.1216583, 3.3488798, -95.3978)
+mesh = SubResource("BoxMesh_nvolk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D6/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_g8qpc")

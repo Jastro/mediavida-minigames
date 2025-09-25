@@ -29,6 +29,7 @@ folder_colors={
 "res://minigames/ClickTheTarget/": "orange",
 "res://minigames/DodgeTheDrop/": "pink",
 "res://minigames/PointerPursuit/": "purple",
+"res://minigames/RacingZero/": "red",
 "res://minigames/TheOrcsAreComingFromTheEast/": "teal"
 }
 
