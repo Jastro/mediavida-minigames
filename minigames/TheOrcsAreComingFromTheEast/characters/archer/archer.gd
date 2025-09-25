@@ -6,9 +6,9 @@ const EXTENDED_RANGE: int = 25
 
 var blood_vfx_scn : PackedScene
 
-var player : CharacterBody2D = null
-var timer
-var arrow_path : Path2D
+var player		: CharacterBody2D = null
+var timer		: Timer
+var arrow_path	: Path2D
 
 var RANGE = {
 	GameManager.Difficulty.EASY		: 400,
@@ -21,7 +21,11 @@ var FREQ = {
 	GameManager.Difficulty.HARD		: 1.2,
 }
 
+var frozen : bool = false
+
 func _ready():
+	add_to_group("freezable")
+	animation_finished.connect(_on_shoot_finished)
 	var arrow_path_scn : PackedScene = preload("res://minigames/TheOrcsAreComingFromTheEast/characters/archer/arrow_path.tscn") as PackedScene
 	blood_vfx_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/Particles/blood_vfx.tscn") as PackedScene
 	play("Idle")
@@ -39,13 +43,17 @@ func _ready():
 	add_child(timer)
 	$Hurtbox.set_new_mask(Defs.L_PLAYER)
 	$Hurtbox.hurt.connect(_on_hurt)
-	
+func _on_shoot_finished():
+	play("Idle")
 func _on_player_detected(player_scene):
 	player = player_scene
 	timer.start()
 	$Area2D.collision_mask = 0
 
 func _on_shoot():
+	if(frozen):
+		timer.stop()
+		return
 	if(player.is_dead()):
 		player = null
 		
@@ -90,3 +98,10 @@ func _on_hurt(_source):
 	visible = false
 	Dead.emit()
 	queue_free()
+
+func freeze():
+	frozen = true
+	timer.stop()
+	$Area2D.monitoring = false
+	$Hurtbox.disable_permanent()
+	

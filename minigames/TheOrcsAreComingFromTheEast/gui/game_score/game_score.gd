@@ -3,11 +3,18 @@ extends PanelContainer
 var partial_score_scn	: PackedScene
 var wincon				: bool	= false
 var total_score			: int	= 0
+
+var difficulty_label = {
+	GameManager.Difficulty.EASY		: "Easy",
+	GameManager.Difficulty.NORMAL	: "Normal",
+	GameManager.Difficulty.HARD		: "Hard",
+}
+
 func _ready():
 	partial_score_scn = preload("res://minigames/TheOrcsAreComingFromTheEast/gui/game_score/partial_score.tscn")
 	%FinishGame.pressed.connect(_on_finish_game)
 func setup(scores, wincon_set):
-	# TODO: Increase points depending on difficulty. Also, the hard difficulty is too damn hard
+	%ScoreLabel.text += " " + difficulty_label[GameManager.get_difficulty()]
 	wincon = wincon_set
 	var tween = create_tween()
 	modulate = Color.TRANSPARENT
@@ -25,6 +32,12 @@ func setup(scores, wincon_set):
 		await partial_score.Finished
 		tween.kill()
 		total_score += score["value"] * score["multiplier"]
+	if(GameManager.get_difficulty() > GameManager.Difficulty.NORMAL):
+		%TotalScore.text += " * 2"
+		tween = create_tween().set_ease(Tween.EASE_OUT_IN)
+		tween.tween_method(update_total_score, total_score, total_score * 2, 0.4).set_delay(1.5)
+		tween.play()
+		await tween.finished
 	%FinishGame.visible = true
 func _on_finish_game():
 	%FinishGame.disabled = true

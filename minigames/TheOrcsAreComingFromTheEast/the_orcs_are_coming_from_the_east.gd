@@ -1,9 +1,20 @@
 extends Node2D
 
+var TIME = {
+	GameManager.Difficulty.EASY		: 120,
+	GameManager.Difficulty.NORMAL	: 60,
+	GameManager.Difficulty.HARD		: 40,
+}
+
 var orcs_defeated		: int	= 0
 var castle_destroyed	: bool	= false
 
 func _ready():
+	$Timer.wait_time = TIME[GameManager.get_difficulty()]
+	$Timer.timeout.connect(_on_loss)
+	$Timer.start()
+	%TimeLeft.text = "Time Left: " + str(int(ceil(TIME[GameManager.get_difficulty()])))
+	$TimeUpdate.timeout.connect(_on_time_update)
 	%Player.Hurt.connect(_on_hurt)
 	%HeartsContainer.initialise(%Player.get_max_hp())
 	$%Player.Cooldown.connect(_on_cooldown_spell)
@@ -28,7 +39,6 @@ func _on_cooldown_spell(time, spell):
 		2:
 			%Dash.set_reuse(time)
 func _on_win():
-	%Player.disable_hurtbox()
 	castle_destroyed = true
 	show_score()
 
@@ -36,6 +46,12 @@ func _on_loss():
 	show_score()
 	
 func show_score():
+	#var tween = create_tween()
+	#tween.tween_property(Engine, "time_scale", 0, 0.2)
+	for enemy in get_tree().get_nodes_in_group("freezable"):
+		enemy.freeze()
+	%Player.disable_hurtbox()
+	$Timer.paused = true
 	var score = [
 		{
 			"attribute" 	: "Orcs defeated",
@@ -55,12 +71,15 @@ func show_score():
 			"total"			: 1,
 			"multiplier"	: 40,
 		},
-		{
+	]
+	if(castle_destroyed):
+		score.append({
 			"attribute"		: "Time left",
-			"value"			: 126,
+			"value"			: $Timer.time_left,
 			"total"			: 0,
 			"multiplier"	: 0.2,
-		}
-	]
+		})
 	%GameScore.visible = true
 	%GameScore.setup(score, castle_destroyed)
+func _on_time_update():
+	%TimeLeft.text = "Time Left: " + str(int(ceil($Timer.time_left)))

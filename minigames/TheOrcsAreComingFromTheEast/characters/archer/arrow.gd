@@ -3,6 +3,7 @@ extends Sprite2D
 signal tree_collision()
 
 func _ready():
+	add_to_group("freezable")
 	$Hitbox.set_new_layer(Defs.L_ENEMY)
 	$Hitbox.enable_permanent()
 	AudioManager.play_sound(AudioManager.ESound.TOE_Shoot)
@@ -17,4 +18,6 @@ func kill():
 func _on_tree_collision(_source):
 	$Area2D.set_deferred("monitoring", false)
 	tree_collision.emit()
-	
+
+func freeze():
+	$Hitbox.disable()
