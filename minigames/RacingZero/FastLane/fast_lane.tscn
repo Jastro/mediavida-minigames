@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2kixjdbqtnyh"]
+
+[sub_resource type="GDScript" id="GDScript_hv0ke"]
+script/source = "extends Area3D
+
+func _ready():
+	collision_layer = RacingZero.L_FAST_LANE
+"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hv0ke"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ipn45"]
+size = Vector2(0.45, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ai6du"]
+size = Vector3(2, 1, 2)
+
+[node name="FastLane" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+script = SubResource("GDScript_hv0ke")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_hv0ke")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4885197)
+mesh = SubResource("PlaneMesh_ipn45")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_ai6du")

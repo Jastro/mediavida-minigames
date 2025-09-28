@@ -5,7 +5,10 @@ enum EHoverCar {
 	TestCar,
 }
 
-const FRICTION = 0.2
+const L_FAST_LANE		: int	= 8
+const FRICTION			: float = 0.2
+const FAST_LANE_IMPULSE : float = -10.0
+const FAST_LANE_DECAY	: float = 3.0
 
 var ACCEL = {
 	EHoverCar.TestCar : 35.0,
