@@ -16,13 +16,14 @@ var desired_acceleration	: float
 var target_rotation			: Vector3 = Vector3.ZERO
 
 var current_speed			: float = 0
-
+var external_impulse		: float = 0
 func _ready():
 	accel				= game_manager.ACCEL[hovercar_type]
 	max_speed			= game_manager.MAX_SPEED[hovercar_type]
 	maneuverability 	= game_manager.MANEUVERABILITY[hovercar_type]
 	max_speed_reverse	= game_manager.MAX_SPEED_REVERSE[hovercar_type]
 	break_power			= game_manager.BREAK[hovercar_type]
+	$FastLaneDetector.collision_mask = RacingZero.L_FAST_LANE
 	
 func _physics_process(delta):
 	var car_direction		= get_global_transform().basis
@@ -38,6 +39,16 @@ func _physics_process(delta):
 		var slope = pb.direction_to(pf)
 		target_rotation = Vector3(slope.y,0,0)
 		
+	if($FastLaneDetector.get_overlapping_areas()):
+		var fast_lane : Area3D = $FastLaneDetector.get_overlapping_areas()[0]
+		var lane_dir = Vector2(fast_lane.basis.z.x, fast_lane.basis.z.z).normalized()
+		var car_dir = Vector2(forward.x, forward.z).normalized()
+		external_impulse = (lane_dir + car_dir).length()/2
+		if(external_impulse < 0.7):
+			external_impulse = 0
+		external_impulse = RacingZero.FAST_LANE_IMPULSE * external_impulse
+		
+	
 	current_speed += desired_acceleration * delta
 	current_speed = clamp(current_speed, -max_speed, max_speed)
 	
@@ -71,5 +82,9 @@ func _physics_process(delta):
 	else:
 		# Usual friction
 		velocity = velocity.lerp(Vector3.ZERO, 4 * delta)
+	# no clamping
+	velocity += forward * external_impulse
 	move_and_slide()
 	$MeshInstance3D.rotation = lerp($MeshInstance3D.rotation, target_rotation, 0.3)
+	# If we add other types of impulses we will have to split this
+	external_impulse = lerp(external_impulse, 0.0, delta * RacingZero.FAST_LANE_DECAY)

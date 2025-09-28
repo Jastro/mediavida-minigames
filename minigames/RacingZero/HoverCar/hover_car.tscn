@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnc0nmh7eofst"]
+[gd_scene load_steps=6 format=3 uid="uid://cnc0nmh7eofst"]
 
 [ext_resource type="Script" uid="uid://b53cu0c2rkig" path="res://minigames/RacingZero/HoverCar/hover_car.gd" id="1_v7cc8"]
 
@@ -13,6 +13,9 @@ size = Vector3(1, 0.5, 2)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7cc8"]
 points = PackedVector3Array(0.5, 0.25, 1, 0.5, -0.25, 1, 0.5, 0.25, -1, -0.5, 0.25, 1, -0.5, -0.25, 1, 0.5, -0.25, -1, -0.5, 0.25, -1, -0.5, -0.25, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7cc8"]
+size = Vector3(1, 1, 2)
 
 [node name="HoverCar" type="CharacterBody3D"]
 floor_stop_on_slope = false
@@ -36,3 +39,12 @@ target_position = Vector3(0, -2, 0)
 [node name="FloorFrontRaycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
 target_position = Vector3(0, -2, 0)
+
+[node name="FastLaneDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FastLaneDetector"]
+shape = SubResource("BoxShape3D_v7cc8")
