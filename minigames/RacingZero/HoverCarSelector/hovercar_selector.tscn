@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://beggd5nkkt4ki"]
+[gd_scene load_steps=7 format=3 uid="uid://beggd5nkkt4ki"]
+
+[ext_resource type="PackedScene" uid="uid://db75kpfpfjaln" path="res://minigames/RacingZero/GUI/charts/SpiderChart/spider_chart.tscn" id="1_sn308"]
 
 [sub_resource type="GDScript" id="GDScript_3bbcg"]
 script/source = "extends Node3D
@@ -70,4 +72,25 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cdqva")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9473613, 0.32016665, 0, -0.32016665, 0.9473613, 0, 1.0628061, 2.8795938)
+transform = Transform3D(1, 0, 0, 0, 0.9473613, 0.32016665, 0, -0.32016665, 0.9473613, 1.195, 1.063, 2.88)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 115
+theme_override_constants/margin_bottom = 50
+
+[node name="SpiderChart" parent="CanvasLayer/CenterContainer" instance=ExtResource("1_sn308")]
+layout_mode = 2
+margin = Vector2(150, 100)
