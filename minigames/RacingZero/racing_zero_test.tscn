@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bu0o844axatha"]
+[gd_scene load_steps=18 format=3 uid="uid://bu0o844axatha"]
 
 [ext_resource type="PackedScene" uid="uid://cnc0nmh7eofst" path="res://minigames/RacingZero/HoverCar/hover_car.tscn" id="1_3tt0t"]
 [ext_resource type="Script" uid="uid://b20b8c5tceaht" path="res://minigames/RacingZero/racing_zero_test.gd" id="1_nvolk"]
 [ext_resource type="PackedScene" uid="uid://d2kixjdbqtnyh" path="res://minigames/RacingZero/FastLane/fast_lane.tscn" id="3_apgsi"]
+[ext_resource type="PackedScene" uid="uid://db75kpfpfjaln" path="res://minigames/RacingZero/GUI/charts/SpiderChart/spider_chart.tscn" id="4_mbcj7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nvolk"]
 
@@ -138,3 +139,15 @@ mesh = SubResource("BoxMesh_apgsi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_wjs3e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="test" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpiderChart" parent="CanvasLayer/test" instance=ExtResource("4_mbcj7")]
+layout_mode = 2

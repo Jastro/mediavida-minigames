@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://db75kpfpfjaln"]
+
+[ext_resource type="Script" uid="uid://bh6p0gklerige" path="res://minigames/RacingZero/GUI/charts/SpiderChart/spider_chart.gd" id="1_wfili"]
+
+[sub_resource type="SystemFont" id="SystemFont_wfili"]
+
+[node name="SpiderChart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_wfili")
+font = SubResource("SystemFont_wfili")

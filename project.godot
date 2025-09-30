@@ -21,6 +21,10 @@ GameManager="*res://GameManager.gd"
 AudioManager="*res://scenes/autoloads/AudioManager.gd"
 Defs="*res://scenes/autoloads/Defs.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={
