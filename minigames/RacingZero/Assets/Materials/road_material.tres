@@ -1,0 +1,36 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://4jn3itxkfmma"]
+
+[ext_resource type="Texture2D" uid="uid://dox7gxtkiia4y" path="res://minigames/RacingZero/Assets/Materials/road_material_albedo.png" id="1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pqf57"]
+noise_type = 5
+frequency = 0.0028
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t6uoo"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_pqf57")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f1lc3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r57l2"]
+noise = SubResource("FastNoiseLite_f1lc3")
+
+[resource]
+albedo_texture = ExtResource("1")
+roughness = 0.93
+normal_enabled = true
+normal_scale = 0.4
+normal_texture = SubResource("NoiseTexture2D_t6uoo")
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_texture = SubResource("NoiseTexture2D_r57l2")
+uv1_offset = Vector3(0, 1, 0)
+texture_filter = 2
+grow_amount = 0.114
+proximity_fade_distance = 0.01
+distance_fade_max_distance = 0.0
+stencil_flags = 2

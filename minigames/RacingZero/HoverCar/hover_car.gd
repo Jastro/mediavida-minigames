@@ -38,7 +38,12 @@ func _physics_process(delta):
 		var pb : Vector3 =$FloorBackRaycast.get_collision_point()
 		var slope = pb.direction_to(pf)
 		target_rotation = Vector3(slope.y,0,0)
-		
+	if($FloorLeftRaycast.is_colliding() and $FloorRightRaycast.is_colliding()):
+		var pl : Vector3 = $FloorLeftRaycast.get_collision_point()
+		var pr : Vector3 = $FloorRightRaycast.get_collision_point()
+		var slope = pl.direction_to(pr)
+		target_rotation = Vector3(target_rotation.x,0,slope.y)
+	
 	if($FastLaneDetector.get_overlapping_areas()):
 		var fast_lane : Area3D = $FastLaneDetector.get_overlapping_areas()[0]
 		var lane_dir = Vector2(fast_lane.basis.z.x, fast_lane.basis.z.z).normalized()
