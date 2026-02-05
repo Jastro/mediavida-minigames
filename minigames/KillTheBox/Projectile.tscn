@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cv7gs2dhwaoga"]
+
+[ext_resource type="Script" uid="uid://d10udfwgvm2dx" path="res://minigames/KillTheBox/Projectile.gd" id="1_fjo7l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjo7l"]
+
+[node name="Projectile" type="Area2D" unique_id=1056916174]
+script = ExtResource("1_fjo7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=564495384]
+shape = SubResource("CircleShape2D_fjo7l")

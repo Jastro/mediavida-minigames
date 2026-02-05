@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://vuw47aelstc3"]
+
+[ext_resource type="Script" uid="uid://4rmaew53doxa" path="res://minigames/KillTheBox/Powerup.gd" id="1_non1x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6gi3"]
+
+[node name="Powerup" type="Area2D" unique_id=655319302]
+script = ExtResource("1_non1x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=574073688]
+shape = SubResource("CircleShape2D_p6gi3")
