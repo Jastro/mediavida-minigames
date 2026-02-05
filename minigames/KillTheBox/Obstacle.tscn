@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ceylgrogduevf"]
+
+[ext_resource type="Script" uid="uid://tlauxst63pa4" path="res://minigames/KillTheBox/Obstacle.gd" id="1_3dqbo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vbnv"]
+size = Vector2(39.58783, 40.274193)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3dqbo"]
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=323543809]
+rotation = 0.80804056
+script = ExtResource("1_3dqbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=161196088]
+position = Vector2(-0.9655925, 0.13709655)
+shape = SubResource("RectangleShape2D_4vbnv")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2092841351]
+offset_left = -20.965107
+offset_top = -20.036573
+offset_right = 19.034893
+offset_bottom = 19.963427
+texture = SubResource("CanvasTexture_3dqbo")

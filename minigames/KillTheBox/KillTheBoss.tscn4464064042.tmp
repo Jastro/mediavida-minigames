@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dix6oegi08owv"]
+
+[ext_resource type="Script" uid="uid://bdo8a60um544b" path="res://minigames/KillTheBoss/KillTheBoss.gd" id="1_hgsof"]
+[ext_resource type="Script" uid="uid://i0xi42r8hcat" path="res://minigames/KillTheBoss/Player.gd" id="2_7d4nc"]
+[ext_resource type="PackedScene" uid="uid://ceylgrogduevf" path="res://minigames/KillTheBoss/Obstacle.tscn" id="2_gx4qp"]
+[ext_resource type="Script" uid="uid://c8hvbjrtfmomh" path="res://minigames/KillTheBoss/Boss.gd" id="2_oo5v2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jjhl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hgsof"]
+
+[node name="KillTheBoss" type="Node2D" unique_id=1297003087]
+script = ExtResource("1_hgsof")
+
+[node name="ObstacleContainer" type="Node2D" parent="." unique_id=1137643764]
+
+[node name="StaticBody2D" parent="ObstacleContainer" unique_id=323543809 instance=ExtResource("2_gx4qp")]
+position = Vector2(201, 384)
+
+[node name="StaticBody2D2" parent="ObstacleContainer" unique_id=777473860 instance=ExtResource("2_gx4qp")]
+position = Vector2(939, 396)
+
+[node name="ProjectileContainer" type="Node2D" parent="." unique_id=699762822]
+
+[node name="PowerupContainer" type="Node2D" parent="." unique_id=1154730225]
+
+[node name="Boss" type="StaticBody2D" parent="." unique_id=1133594294]
+position = Vector2(609, 115)
+script = ExtResource("2_oo5v2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss" unique_id=1138934080]
+shape = SubResource("CircleShape2D_7jjhl")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=395809474]
+position = Vector2(620, 503)
+script = ExtResource("2_7d4nc")
+
+[node name="CircleShape2D" type="CollisionShape2D" parent="Player" unique_id=1528278795]
+shape = SubResource("CircleShape2D_hgsof")
+
+[node name="GameTimer" type="Timer" parent="." unique_id=2137517771]
+wait_time = 10.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1702307581]
+
+[node name="TopBar" type="Panel" parent="CanvasLayer" unique_id=1130478277]
+custom_minimum_size = Vector2(0, 44)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/TopBar" unique_id=1233687497]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="BossHPBar" type="ProgressBar" parent="CanvasLayer/TopBar" unique_id=569006027]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -27.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1831593371]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/HUD" unique_id=192464317]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="PlayerHPBar" type="ProgressBar" parent="CanvasLayer/HUD" unique_id=646475194]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -27.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 0
