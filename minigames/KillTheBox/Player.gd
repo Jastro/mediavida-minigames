@@ -78,7 +78,7 @@ func _physics_process(_delta: float) -> void:
 
 	velocity = dir * move_speed
 	move_and_slide()
-		# Clamp al arena
+	# Clamp al arena
 	if _arena_rect.size.x > 0.0 and _arena_rect.size.y > 0.0:
 		var min_x: float = _arena_rect.position.x + PLAYER_RADIUS
 		var max_x: float = _arena_rect.position.x + _arena_rect.size.x - PLAYER_RADIUS
